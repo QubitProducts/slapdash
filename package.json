@@ -7,9 +7,6 @@
     "test": "test",
     "lib": "lib"
   },
-  "dependencies": {
-    "alien-bind": "^1.0.1"
-  },
   "devDependencies": {
     "chai": "^3.5.0",
     "karma": "^0.13.22",
