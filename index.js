@@ -6,7 +6,6 @@ module.exports = {
   map: require('./lib/map'),
   objectMap: require('./lib/objectMap'),
   find: require('./lib/find'),
-  objectFind: require('./lib/objectFind'),
   pluck: require('./lib/pluck'),
   reduce: require('./lib/reduce'),
   objectReduce: require('./lib/objectReduce'),

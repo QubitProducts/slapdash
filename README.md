@@ -128,16 +128,7 @@ Lodash's default behavior returns an array of mapped-over values - to get an arr
 Where available, this will call [`Array.prototype.find`][mdn-Array-find]. Otherwise, this provides its own
 implementation.
 
-  - This only supports arrays, not objects. Use `objectFind` instead.
-  - Callback must be a function. Objects or strings are not supported.
-
-### `objectFind(object, callback, thisArg)`
-
-This implements the object behavior of lodash's `find` method.
-
-#### Notes
-
-  - This only supports objects, not arrays. Use `find` instead.
+  - This only supports arrays, not objects. There is no `objectFind`, as it's really not that useful.
   - Callback must be a function. Objects or strings are not supported.
 
 ### `pluck(array, key)`

@@ -1,6 +1,6 @@
 var slapdash = require('../../')
 
-var methods = ['each', 'extend', 'find', 'invoke', 'map', 'objectEach', 'objectFind', 'objectMap', 'objectReduce', 'pluck', 'reduce', 'without']
+var methods = ['each', 'extend', 'find', 'invoke', 'map', 'objectEach', 'objectMap', 'objectReduce', 'pluck', 'reduce', 'without']
 
 methods.forEach(function (methodName) {
   describe(methodName, function () {
