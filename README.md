@@ -8,12 +8,12 @@
 
 ## What?
 
-Slapdash is a lightweight utility JavaScript utility belt, inspired heavily by
-lodash, with the following desirable features:
+Slapdash is a lightweight JavaScript utility belt, inspired heavily by
+[lodash][lodash], with the following desirable features:
 
  - Perform as quickly as possible
  - Be as small as possible
- - Be compatible with Internet Explorer 9 and up (ES5, essentially)
+ - Be compatible with Internet Explorer 9 and up ([ES5][es5], essentially)
  - Allow methods to be required individually
 
 ## Why?
@@ -23,7 +23,7 @@ lodash, with the following desirable features:
 
 ## Facts & Figures
 
- - When bundled using `webpack -p`, the output filesize is a tiny **2.3kb** (**725 bytes** when gzipped)!
+ - When bundled using `webpack -p`, the output filesize is a tiny **2.3kb** (only **725 bytes** when gzipped)!
 
 # API Overview
 
@@ -33,19 +33,19 @@ After analyzing the usage of mini_lodash in deliver-lib, we can draw the followi
 
    - `bind`: this will be provided by `alien-bind`, because polyfills.
    - `extend`: **Shallow** extend! This will use `Object.assign` where available.
-   - `each`: Wrapper around `Array::forEach`.
-   - `map`: Wrapper around `Array::map`
+   - `each`: Wrapper around [`Array.prototype.forEach`][mdn-Array-forEach].
+   - `map`: Wrapper around [`Array.prototype.map`][mdn-Array-map]
    - `findWhere`: Alias of `find`
    - `chain`: Unlikely to implement this, will refactor usage of this where found.
-   - `find`: Wrapper around `Array::find` where available
+   - `find`: Wrapper around [`Array.prototype.find`][mdn-Array-find] where available
    - `pluck`: This is just `map` with a string callback.
 
  - These methods are used between 5-10 times:
 
-   - `reduce`: Wrapper around `Array::reduce`
+   - `reduce`: Wrapper around [`Array.prototype.reduce`][mdn-Array-reduce]
    - `invoke`: Basically just `map`
    - `keys`: `Object.keys` man. Come on.
-   - `without`: Wrapper around `Array::filter`
+   - `without`: Wrapper around [`Array.prototype.filter`][mdn-Array-filter]
    - `isNumber`: `typeof x === 'number'`
    - `isFunction`: `typeof x === 'function'`
 
@@ -71,11 +71,11 @@ Based on this, the API will look something like:
 
 ### `bind(method, thisArg)`
 
-We use this all over the place, but absolutely cannot rely on the browser's native `Function::bind` method. This will use `alien-bind` under the bonnet.
+We use this all over the place, but absolutely cannot rely on the browser's native [`Function.prototype.bind`][mdn-Function-bind] method. This will use [`alien-bind`][alien-bind] under the bonnet.
 
 ### `extend(target, ...sources)`
 
-This is a handy one that we use a lot. Where `Object.assign` is available, this will be used.
+This is a handy one that we use a lot. Where [`Object.assign`][mdn-Object-assign] is available, this will be used.
 
 #### Notes
 
@@ -83,7 +83,7 @@ This is a handy one that we use a lot. Where `Object.assign` is available, this 
 
 ### `each(array, callback, thisArg)`
 
-This is a wrapper around `Array::forEach`.
+This is a wrapper around [`Array.prototype.forEach`][mdn-Array-forEach].
 
 #### Notes
 
@@ -103,7 +103,7 @@ This implements the object behavior of lodash's `each` method.
 
 ### `map(array, callback, thisArg)`
 
-This is a wrapper around `Array::map`.
+This is a wrapper around [`Array.prototype.map`][mdn-Array-map].
 
 #### Notes
 
@@ -123,7 +123,7 @@ Lodash's default behavior returns an array of mapped-over values - to get an arr
 
 ### `find(array, callback, thisArg)`
 
-Where available, this will call `Array::find`. Otherwise, this provides its own
+Where available, this will call [`Array.prototype.find`][mdn-Array-find]. Otherwise, this provides its own
 implementation.
 
   - This only supports arrays, not objects. Use `objectFind` instead.
@@ -148,7 +148,7 @@ Returns a new array, containing the `key` attribute from each member of `array`.
 
 ### `reduce(array, callback, initialValue)`
 
-This is just a wrapper around `Array::reduce`.
+This is just a wrapper around [`Array.prototype.reduce`][mdn-Array-reduce].
 
 #### Notes
 
@@ -183,3 +183,11 @@ Returns the contents of `array`, minus anything in `exclude`.
 
 [slapdash-transformers]: http://tfwiki.net/wiki/Slap_Dash
 [lodash]: http://lodash.com/
+[es5]: http://caniuse.com/#search=es5
+[mdn-Object-assign]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Object/assign
+[mdn-Function-bind]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind
+[mdn-Array-map]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/map
+[mdn-Array-find]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/find
+[mdn-Array-filter]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/filter
+[mdn-Array-reduce]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/reduce
+[mdn-Array-forEach]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/forEach
