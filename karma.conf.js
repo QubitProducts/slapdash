@@ -1,5 +1,3 @@
-var path = require('path')
-
 module.exports = function (config) {
   config.set({
     frameworks: ['mocha', 'chai', 'sinon'],
@@ -26,6 +24,6 @@ module.exports = function (config) {
       noInfo: true
     },
 
-    browsers: ['Chrome', 'Firefox']
+    browsers: ['Chrome', 'Firefox', 'PhantomJS']
   })
 }
