@@ -172,8 +172,7 @@ Returns the contents of `array`, minus anything in `exclude`.
 #### Notes
 
   - Only supports a single `exclude` parameter as an array. Multiple arguments are not supported.
-
-
+  - If an empty (or falsey) `exclude` parameter is passed, the original `array` will be returned. Bear this in mind if you will be mutating the returned array.
 
 [slapdash-transformers]: http://tfwiki.net/wiki/Slap_Dash
 [lodash]: http://lodash.com/
