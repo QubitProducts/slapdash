@@ -11,5 +11,6 @@ module.exports = {
   reduce: require('./lib/reduce'),
   objectReduce: require('./lib/objectReduce'),
   invoke: require('./lib/invoke'),
-  without: require('./lib/without')
+  without: require('./lib/without'),
+  name: 'slapdash'
 }

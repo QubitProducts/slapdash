@@ -12,6 +12,7 @@ Slapdash is a lightweight utility JavaScript utility belt, inspired heavily by
 lodash, with the following desirable features:
 
  - Perform as quickly as possible
+ - Be as small as possible
  - Be compatible with Internet Explorer 9 and up (ES5, essentially)
  - Allow methods to be required individually
 
@@ -19,6 +20,10 @@ lodash, with the following desirable features:
 
  - Nobody cares about IE8 any more. Nobody wants to care about IE9 either, but unfortunately some people are still using it.
  - Even with a custom build, lodash 2 is a monolithic JS bundle - it's better if we can require individual methods from it to keep our bundles smaller.
+
+## Facts & Figures
+
+ - When bundled using `webpack -p`, the output filesize is a tiny **2.3kb** (**725 bytes** when gzipped)!
 
 # API Overview
 
@@ -107,7 +112,9 @@ This is a wrapper around `Array::map`.
 
 ### `objectMap(object, callback, thisArg)`
 
-This implements the object behavior of lodash's `map` method.
+Behaves like `map`, but operates on the values of an object. Returns a new object, with the same keys, but values updated using `callback`.
+
+Lodash's default behavior returns an array of mapped-over values - to get an array back from `objectMap`, use `objectMap.asArray(...)`
 
 #### Notes
 
@@ -137,7 +144,7 @@ Returns a new array, containing the `key` attribute from each member of `array`.
 
 #### Notes
 
-  - Lodash actually implements this as an alias of `map`. This will be its own function.
+  - Lodash actually implements this as an alias of `map`. Because I'm not a masochist, slapdash's version is as simple as possible.
 
 ### `reduce(array, callback, initialValue)`
 
@@ -171,8 +178,8 @@ Returns the contents of `array`, minus anything in `exclude`.
 
 #### Notes
 
-  - Only supports a single `exclude` parameter as an array. Multiple arguments are not supported.
-  - If an empty (or falsey) `exclude` parameter is passed, the original `array` will be returned. Bear this in mind if you will be mutating the returned array.
+  - `exclude` may only be a single, flat array. Unlike lodash's version, this does not flatten the arguments list together.
+  - If an empty (or falsey) `exclude` parameter is passed, the original `array` will be returned. Bear this in mind if you are mutating the returned array.
 
 [slapdash-transformers]: http://tfwiki.net/wiki/Slap_Dash
 [lodash]: http://lodash.com/
