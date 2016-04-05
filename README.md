@@ -11,7 +11,7 @@
 [![Codeship Status for qubitdigital/slapdash](https://codeship.com/projects/3775dd10-dd64-0133-6ef5-6a9399c471b8/status?branch=master)][codeship]
 
 Slapdash is a lightweight JavaScript utility belt, inspired heavily by
-[lodash][lodash], with the following desirable features:
+[lodash][lodash], with the following goals:
 
  - Perform as quickly as possible
  - Be as small as possible
@@ -33,7 +33,7 @@ After analyzing the usage of mini_lodash in deliver-lib, we can draw the followi
 
  - These methods are used 10 or more times in our codebase.
 
-   - `bind`: this will be provided by `alien-bind`, because polyfills.
+   - `bind`: Used everywhere, extremely necessary. Shouldn't ever use the native.
    - `extend`: **Shallow** extend! This will use `Object.assign` where available.
    - `each`: Wrapper around [`Array.prototype.forEach`][mdn-Array-forEach].
    - `map`: Wrapper around [`Array.prototype.map`][mdn-Array-map]
@@ -73,7 +73,7 @@ Based on this, the API will look something like:
 
 ### `bind(method, thisArg)`
 
-We use this all over the place, but absolutely cannot rely on the browser's native [`Function.prototype.bind`][mdn-Function-bind] method. This will use [`alien-bind`][alien-bind] under the bonnet.
+We use this all over the place, but absolutely cannot rely on the browser's native [`Function.prototype.bind`][mdn-Function-bind] method.
 
 ### `extend(target, ...sources)`
 
