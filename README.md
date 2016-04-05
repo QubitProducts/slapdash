@@ -8,6 +8,8 @@
 
 ## What?
 
+[![Codeship Status for qubitdigital/slapdash](https://codeship.com/projects/3775dd10-dd64-0133-6ef5-6a9399c471b8/status?branch=master)][codeship]
+
 Slapdash is a lightweight JavaScript utility belt, inspired heavily by
 [lodash][lodash], with the following desirable features:
 
@@ -183,6 +185,7 @@ Returns the contents of `array`, minus anything in `exclude`.
 
 [slapdash-transformers]: http://tfwiki.net/wiki/Slap_Dash
 [lodash]: http://lodash.com/
+[codeship]: https://codeship.com/projects/144381
 [es5]: http://caniuse.com/#search=es5
 [mdn-Object-assign]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Object/assign
 [mdn-Function-bind]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind
