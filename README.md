@@ -25,7 +25,7 @@ Slapdash is a lightweight JavaScript utility belt, inspired heavily by
 
 ## Facts & Figures
 
- - When bundled using `webpack -p`, the output filesize is a tiny **2.3kb** (only **725 bytes** when gzipped)!
+ - When bundled using `webpack -p`, the output filesize is a tiny **2kb** (only **674 bytes** when gzipped)!
 
 # API Overview
 
