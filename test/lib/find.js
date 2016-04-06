@@ -2,12 +2,12 @@ var find = require('../../lib/find')
 
 describe('find', function () {
   var array = [1, 10, 100]
-  var thisArg = { success: true }
+  var context = { success: true }
   var callback, result
 
   beforeEach(function () {
     callback = sinon.spy(function (value) { return value > 9 })
-    result = find(array, callback, thisArg)
+    result = find(array, callback, context)
   })
 
   it('should call `callback` for each element of `array`, until a match is found', function () {
@@ -17,8 +17,8 @@ describe('find', function () {
     })
   })
 
-  it('should call `callback` bound on `thisArg`', function () {
-    sinon.assert.alwaysCalledOn(callback, thisArg)
+  it('should call `callback` bound on `context`', function () {
+    sinon.assert.alwaysCalledOn(callback, context)
   })
 
   it('should return the first value that matches', function () {

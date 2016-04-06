@@ -10,12 +10,12 @@ var keys = Object.keys(object)
 var values = keys.map(function (key) { return object[key] })
 
 describe('objectEach', function () {
-  var callback, thisArg
+  var callback, context
 
   beforeEach(function () {
     callback = sinon.spy()
-    thisArg = { success: true }
-    objectEach(object, callback, thisArg)
+    context = { success: true }
+    objectEach(object, callback, context)
   })
 
   it('should call `callback` once for each element of `object`', function () {
@@ -25,8 +25,8 @@ describe('objectEach', function () {
     })
   })
 
-  it('should call `callback`, bound to `thisArg`', function () {
-    sinon.assert.alwaysCalledOn(callback, thisArg)
+  it('should call `callback`, bound to `context`', function () {
+    sinon.assert.alwaysCalledOn(callback, context)
   })
 
   it('should always return `undefined`', function () {

@@ -3,12 +3,12 @@ var each = require('../../lib/each')
 var array = [ 'hello', 'there', 'tests' ]
 
 describe('each', function () {
-  var callback, thisArg
+  var callback, context
 
   beforeEach(function () {
     callback = sinon.spy()
-    thisArg = { success: true }
-    each(array, callback, thisArg)
+    context = { success: true }
+    each(array, callback, context)
   })
 
   it('should call `callback` once for each element of `array`', function () {
@@ -18,8 +18,8 @@ describe('each', function () {
     })
   })
 
-  it('should call `callback`, bound to `thisArg`', function () {
-    sinon.assert.alwaysCalledOn(callback, thisArg)
+  it('should call `callback`, bound to `context`', function () {
+    sinon.assert.alwaysCalledOn(callback, context)
   })
 
   it('should always return `undefined`', function () {
