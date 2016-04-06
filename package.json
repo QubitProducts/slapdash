@@ -9,19 +9,22 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "grunt": "^0.4.5",
     "karma": "^0.13.22",
+    "karma-benchmark": "^0.4.0",
+    "karma-benchmark-reporter": "^0.1.1",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.2.3",
     "karma-firefox-launcher": "^0.1.7",
     "karma-mocha": "^0.2.2",
     "karma-phantomjs-launcher": "^1.0.0",
+    "karma-safari-launcher": "^0.1.1",
     "karma-sinon": "^1.0.4",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.4.5",
     "phantomjs-prebuilt": "^2.1.7",
     "sinon": "^1.17.3",
-    "sinon-chai": "^2.8.0",
     "standard": "^6.0.8",
     "webpack": "^1.12.14"
   },
@@ -29,7 +32,9 @@
     "lint": "./node_modules/.bin/standard ./lib",
     "test-js": "./node_modules/.bin/karma start --single-run",
     "test": "npm run lint && npm run test-js",
-    "test-watch": "./node_modules/.bin/karma start --watch"
+    "test-watch": "./node_modules/.bin/karma start --watch",
+    "benchmark": "./node_modules/.bin/karma start karma.bench.js --single-run",
+    "benchmark-watch": "./node_modules/.bin/karma start karma.bench.js --watch"
   },
   "repository": {
     "type": "git",
@@ -50,7 +55,9 @@
       "before",
       "after",
       "expect",
-      "sinon"
+      "sinon",
+      "suite",
+      "benchmark"
     ]
   }
 }
