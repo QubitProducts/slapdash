@@ -15,7 +15,7 @@ describe('objectMap', function () {
   })
 
   it('should call `callback` once for each element of `object`', function () {
-    sinon.assert.calledThrice(callback)
+    expect(callback.callCount).to.equal(values.length)
     callback.getCalls().forEach(function (call, index) {
       sinon.assert.calledWithExactly(call, values[index], keys[index], object)
     })
@@ -26,6 +26,10 @@ describe('objectMap', function () {
   })
 
   it('should return a new object', function () {
+    expect(result).to.not.equal(object)
+  })
+
+  it('should have applied `callback` to each value of `object`', function () {
     expect(result).to.eql({ a: 2, b: 4, c: 6 })
   })
 

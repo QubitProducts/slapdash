@@ -12,7 +12,7 @@ describe('each', function () {
   })
 
   it('should call `callback` once for each element of `array`', function () {
-    sinon.assert.calledThrice(callback)
+    expect(callback.callCount).to.equal(array.length)
     callback.getCalls().forEach(function (call, index) {
       sinon.assert.calledWithExactly(call, array[index], index, array)
     })
