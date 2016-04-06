@@ -36,6 +36,7 @@ describe('objectMap', function () {
   describe('asArray', function () {
     it('should return a new array', function () {
       result = objectMap.asArray(object, callback, context)
+      expect(result).to.not.equal(object)
       expect(result).to.eql([ 2, 4, 6 ])
     })
   })

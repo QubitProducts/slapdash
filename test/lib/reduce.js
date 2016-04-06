@@ -6,22 +6,23 @@ describe('reduce', function () {
   var callback, actual
 
   beforeEach(function () {
-    callback = sinon.spy(function (prev, next) { return next + prev })
+    callback = sinon.spy(function (memo, value) { return memo + value })
     actual = reduce(array, callback, 0)
   })
 
   it('should call `callback` once for each element of `array`', function () {
-    sinon.assert.calledThrice(callback)
+    expect(callback.callCount).to.equal(array.length)
     callback.getCalls().forEach(function (call, index, calls) {
-      if (index === 0) {
-        sinon.assert.calledWithExactly(call, 0, array[index], index, array)
-      } else {
-        sinon.assert.calledWithExactly(call, calls[index - 1].returnValue, array[index], index, array)
-      }
+      var memo = index > 0 ? calls[index - 1].returnValue : 0
+      sinon.assert.calledWithExactly(call, memo, array[index], index, array)
     })
   })
 
   it('should return the reduced value', function () {
-    expect(actual).to.equal(6)
+    var sum = 0
+    for (var i = 0, len = array.length; i < len; i++) {
+      sum += array[i]
+    }
+    expect(actual).to.equal(sum)
   })
 })

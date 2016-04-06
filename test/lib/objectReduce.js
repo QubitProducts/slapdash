@@ -14,11 +14,11 @@ describe('objectReduce', function () {
   })
 
   it('should call `callback` once for each element of `object`', function () {
-    sinon.assert.calledThrice(callback)
+    expect(callback.callCount).to.equal(3)
     callback.getCalls().forEach(function (call, index, calls) {
       sinon.assert.calledWithExactly(
         call,
-        index ? calls[index - 1].returnValue : 0,
+        index > 0 ? calls[index - 1].returnValue : 0,
         values[index],
         keys[index],
         object

@@ -18,15 +18,15 @@ describe('invoke', function () {
     Foo.prototype.a = callback
     var array = [new Foo()]
     invoke(array, 'a')
-    sinon.assert.calledOnce(callback)
+    expect(callback.callCount).to.equal(1)
   })
 
   it('should return an array of the original length', function () {
     var array = [{ a: callback }, { a: callback }, { a: callback }]
     var result = invoke(array, 'a')
-    sinon.assert.calledThrice(callback)
+    expect(callback.callCount).to.equal(array.length)
     expect(result).to.be.an('array')
-    expect(result).to.have.length(3)
+    expect(result).to.have.length(array.length)
     result.forEach(function (r) {
       expect(r).to.eql({ success: true })
     })

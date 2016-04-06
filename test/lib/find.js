@@ -11,7 +11,7 @@ describe('find', function () {
   })
 
   it('should call `callback` for each element of `array`, until a match is found', function () {
-    sinon.assert.calledTwice(callback)
+    expect(callback.callCount).to.equal(2)
     callback.getCalls().forEach(function (call, index) {
       sinon.assert.calledWithExactly(call, array[index], index, array)
     })
@@ -22,7 +22,7 @@ describe('find', function () {
   })
 
   it('should return the first value that matches', function () {
-    expect(result).to.eql(10)
+    expect(result).to.equal(array[1])
   })
 
   describe('when no value matches', function () {

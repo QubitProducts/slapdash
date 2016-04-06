@@ -19,7 +19,7 @@ describe('objectEach', function () {
   })
 
   it('should call `callback` once for each element of `object`', function () {
-    sinon.assert.calledThrice(callback)
+    expect(callback.callCount).to.equal(keys.length)
     callback.getCalls().forEach(function (call, index) {
       sinon.assert.calledWithExactly(call, values[index], keys[index], object)
     })

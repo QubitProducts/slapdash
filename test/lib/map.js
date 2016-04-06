@@ -12,7 +12,7 @@ describe('map', function () {
   })
 
   it('should call `callback` once for each element of `array`', function () {
-    sinon.assert.calledThrice(callback)
+    expect(callback.callCount).to.equal(array.length)
     callback.getCalls().forEach(function (call, index) {
       sinon.assert.calledWithExactly(call, array[index], index, array)
     })
@@ -23,6 +23,7 @@ describe('map', function () {
   })
 
   it('should return a new array', function () {
+    expect(actual).to.not.equal(array)
     expect(actual).to.eql([ 2, 4, 6 ])
   })
 })
