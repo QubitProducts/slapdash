@@ -8,22 +8,21 @@
     "lib": "lib"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "browserify": "^13.0.0",
     "karma": "^0.13.22",
-    "karma-chai": "^0.1.0",
+    "karma-browserify": "^5.0.4",
     "karma-chrome-launcher": "^0.2.3",
+    "karma-expect": "^1.1.2",
     "karma-firefox-launcher": "^0.1.7",
     "karma-mocha": "^0.2.2",
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-sinon": "^1.0.4",
     "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^1.7.0",
     "mocha": "^2.4.5",
     "phantomjs-prebuilt": "^2.1.7",
     "sinon": "^1.17.3",
-    "sinon-chai": "^2.8.0",
     "standard": "^6.0.8",
-    "webpack": "^1.12.14"
+    "watchify": "^3.7.0"
   },
   "scripts": {
     "lint": "./node_modules/.bin/standard ./lib",

@@ -1,9 +1,9 @@
 var objectReduce = require('../../lib/objectReduce')
+var each = require('../../lib/each')
 
 var object = { a: 1, b: 2, c: 3 }
-
-var keys = Object.keys(object)
-var values = keys.map(function (key) { return object[key] })
+var values = [1, 2, 3]
+var keys = ['a', 'b', 'c']
 
 describe('objectReduce', function () {
   var callback, actual
@@ -15,7 +15,7 @@ describe('objectReduce', function () {
 
   it('should call `callback` once for each element of `object`', function () {
     expect(callback.callCount).to.equal(3)
-    callback.getCalls().forEach(function (call, index, calls) {
+    each(callback.getCalls(), function (call, index, calls) {
       sinon.assert.calledWithExactly(
         call,
         index > 0 ? calls[index - 1].returnValue : 0,

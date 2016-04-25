@@ -2,8 +2,8 @@ var objectMap = require('../../lib/objectMap')
 
 var object = { a: 1, b: 2, c: 3 }
 
-var keys = Object.keys(object)
-var values = keys.map(function (key) { return object[key] })
+var keys = ['a', 'b', 'c']
+var values = [1, 2, 3]
 
 describe('objectMap', function () {
   var callback, context, result
