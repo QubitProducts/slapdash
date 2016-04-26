@@ -95,7 +95,7 @@ Based on this, the API will look something like:
 
 ## Methods
 
-### `bind(method, thisArg)`
+### `bind(method, context)`
 
 We use this all over the place, but absolutely cannot rely on the browser's native [`Function.prototype.bind`][mdn-Function-bind] method.
 
@@ -105,9 +105,9 @@ This is a handy one that we use a lot. Where [`Object.assign`][mdn-Object-assign
 
 #### Notes
 
- - This will not support the optional `callback` and `thisArg` methods from lodash.
+ - This will not support the optional `callback` and `context` methods from lodash.
 
-### `each(array, callback, thisArg)`
+### `each(array, callback, context)`
 
 This is a wrapper around [`Array.prototype.forEach`][mdn-Array-forEach].
 
@@ -117,7 +117,7 @@ This is a wrapper around [`Array.prototype.forEach`][mdn-Array-forEach].
  - This only supports arrays, not objects. Use `objectEach` instead.
  - Callback must be a function. Objects or strings are not supported.
 
-### `objectEach(object, callback, thisArg)`
+### `objectEach(object, callback, context)`
 
 This implements the object behavior of lodash's `each` method.
 
@@ -127,7 +127,7 @@ This implements the object behavior of lodash's `each` method.
  - This only supports objects, not arrays. Use `each` instead.
  - Callback must be a function. Objects or strings are not supported.
 
-### `map(array, callback, thisArg)`
+### `map(array, callback, context)`
 
 This is a wrapper around [`Array.prototype.map`][mdn-Array-map].
 
@@ -136,7 +136,7 @@ This is a wrapper around [`Array.prototype.map`][mdn-Array-map].
   - This only supports arrays, not objects. Use `objectMap` instead.
   - Callback must be a function. Objects or strings are not supported. For string support, use `pluck`.
 
-### `objectMap(object, callback, thisArg)`
+### `objectMap(object, callback, context)`
 
 Behaves like `map`, but operates on the values of an object. Returns a new object, with the same keys, but values updated using `callback`.
 
@@ -147,7 +147,7 @@ Lodash's default behavior returns an array of mapped-over values - to get an arr
   - This only supports objects, not arrays. Use `map` instead.
   - Callback must be a function. Objects or strings are not supported.
 
-### `find(array, callback, thisArg)`
+### `find(array, callback, context)`
 
 Where available, this will call [`Array.prototype.find`][mdn-Array-find]. Otherwise, this provides its own
 implementation.
