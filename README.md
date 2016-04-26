@@ -33,7 +33,7 @@ Slapdash is a lightweight JavaScript utility belt, inspired heavily by
 
 # Usage
 
-    npm install slapdash
+    npm install @qubit/slapdash
 
 You can then import the whole thing:
 

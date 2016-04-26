@@ -1,5 +1,5 @@
 {
-  "name": "slapdash",
+  "name": "@qubit/slapdash",
   "version": "0.3.0",
   "description": "Slapdash is a lightweight utility JavaScript utility belt, inspired heavily by lodash",
   "main": "index.js",
