@@ -13,11 +13,11 @@ Slapdash is a lightweight JavaScript utility belt, inspired heavily by
  - Allow methods to be required individually
  - Protect from browser native overrides
 
- [![Slapdash](http://i.imgur.com/bcHchs7.jpg)][slapdash-transformers]
+[![Slapdash](http://i.imgur.com/bcHchs7.jpg)][slapdash-transformers]
 
- > Slapdash's prodigious speed allows him to do everything quickly—which he likes, because anything else would require effort.
- >
- > -- [Transformers Wiki][slapdash-transformers]
+> Slapdash's prodigious speed allows him to do everything quickly—which he likes, because anything else would require effort.
+>
+> -- [Transformers Wiki][slapdash-transformers]
 
 ## Why?
 
