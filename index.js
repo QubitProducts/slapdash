@@ -6,10 +6,12 @@ module.exports = {
   map: require('./lib/map'),
   objectMap: require('./lib/objectMap'),
   find: require('./lib/find'),
+  filter: require('./lib/filter'),
   pluck: require('./lib/pluck'),
   reduce: require('./lib/reduce'),
   objectReduce: require('./lib/objectReduce'),
   invoke: require('./lib/invoke'),
   without: require('./lib/without'),
+  slice: require('./lib/slice'),
   name: 'slapdash'
 }

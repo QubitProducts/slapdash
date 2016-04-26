@@ -1,19 +1,17 @@
 var slapdash = require('../../')
 
-var methods = ['each', 'extend', 'find', 'invoke', 'map', 'objectEach', 'objectMap', 'objectReduce', 'pluck', 'reduce', 'without']
+var methods = ['bind', 'each', 'extend', 'find', 'filter', 'invoke', 'map', 'objectEach', 'objectMap', 'objectReduce', 'pluck', 'reduce', 'slice', 'without']
 
-methods.forEach(function (methodName) {
-  describe(methodName, function () {
-    it('should exist as a property of _', function () {
-      expect(slapdash).to.have.property(methodName)
-    })
+for (var i = 0; i < methods.length; i++) {
+  (function (methodName) {
+    describe(methodName, function () {
+      it('should exist as a property of _', function () {
+        expect(slapdash).to.have.property(methodName)
+      })
 
-    it('should be a function', function () {
-      expect(slapdash[methodName]).to.be.a('function')
+      it('should be a function', function () {
+        expect(slapdash[methodName]).to.be.a('function')
+      })
     })
-
-    it('should be availble in the /lib/ folder', function () {
-      expect(require('../../lib/' + methodName)).to.equal(slapdash[methodName])
-    })
-  })
-})
+  }(methods[i]))
+}

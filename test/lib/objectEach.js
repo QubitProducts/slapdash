@@ -6,8 +6,8 @@ var object = {
   slap: 'dash'
 }
 
-var keys = Object.keys(object)
-var values = keys.map(function (key) { return object[key] })
+var keys = ['hello', 'awesome', 'slap']
+var values = ['world', 'yes', 'dash']
 
 describe('objectEach', function () {
   var callback, context
