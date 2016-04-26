@@ -14,5 +14,6 @@ module.exports = {
   without: require('./lib/without'),
   slice: require('./lib/slice'),
   indexOf: require('./lib/indexOf'),
+  keys: require('./lib/keys'),
   name: 'slapdash'
 }
