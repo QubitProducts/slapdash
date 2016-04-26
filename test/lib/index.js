@@ -1,6 +1,6 @@
 var slapdash = require('../../')
 
-var methods = ['each', 'extend', 'find', 'invoke', 'map', 'objectEach', 'objectMap', 'objectReduce', 'pluck', 'reduce', 'without']
+var methods = ['bind', 'each', 'extend', 'find', 'filter', 'invoke', 'map', 'objectEach', 'objectMap', 'objectReduce', 'pluck', 'reduce', 'slice', 'without']
 
 for (var i = 0; i < methods.length; i++) {
   (function (methodName) {
@@ -12,11 +12,6 @@ for (var i = 0; i < methods.length; i++) {
       it('should be a function', function () {
         expect(slapdash[methodName]).to.be.a('function')
       })
-
-      // Browserify can suck it
-      // it('should be availble in the /lib/ folder', function () {
-      //   expect(require('../../lib/' + methodName + '.js')).to.equal(slapdash[methodName])
-      // })
     })
   }(methods[i]))
 }
