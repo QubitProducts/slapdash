@@ -32,6 +32,7 @@ Slapdash is a lightweight JavaScript utility belt, inspired heavily by
  - Where possible, slapdash uses browser native methods to boost performance. However, the first time it attempts to get a native method, it will make sure that it is the one it expected. If another script has tampered with the prototype (or doesn't provide one at all), we fall back to our own (small, performant) implementation.
 
 # Usage
+<<<<<<< HEAD
 
     npm install slapdash
 
@@ -43,6 +44,19 @@ You can then import the whole thing:
 
     import _ from 'slapdash'
 
+=======
+
+    npm install slapdash
+
+You can then import the whole thing:
+
+    var _ = require('slapdash')
+
+    // or
+
+    import _ from 'slapdash'
+
+>>>>>>> 263cd14a29b1afdb57d0a353806a25b7528e3bdc
 or cherrypick the methods you want:
 
     var map = require('slapdash/lib/map')
