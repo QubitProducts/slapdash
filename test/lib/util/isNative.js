@@ -29,9 +29,9 @@ function tryToGetNative (name) {
   var glbl = Function('return this')() // eslint-disable-line no-new-func
   var output = glbl
   var parts = name.split(/\./g)
-  var len = parts.length
+  var length = parts.length
   var i
-  for (i = 0; i < len; i++) {
+  for (i = 0; i < length; i++) {
     output = output[parts[i]]
   }
   return output
