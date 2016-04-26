@@ -18,9 +18,7 @@ describe('isNative', function () {
       var method = tryToGetNative(i)
       var result = isNative(method)
 
-      if (!method) {
-        console.warn('Could not get ' + i)
-      } else {
+      if (method) {
         expect(result).to.eql(testCases[i])
       }
     })

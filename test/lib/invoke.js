@@ -27,9 +27,9 @@ describe('invoke', function () {
     expect(callback.callCount).to.equal(array.length)
     expect(result).to.be.an('array')
     expect(result).to.have.length(array.length)
-    result.forEach(function (r) {
-      expect(r).to.eql({ success: true })
-    })
+    for (var i = 0; i < result.length; i++) {
+      expect(result[i]).to.eql({ success: true })
+    }
   })
 
   it('should pass additional parameters to the callback', function () {

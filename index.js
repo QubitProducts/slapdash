@@ -13,5 +13,6 @@ module.exports = {
   invoke: require('./lib/invoke'),
   without: require('./lib/without'),
   slice: require('./lib/slice'),
+  indexOf: require('./lib/indexOf'),
   name: 'slapdash'
 }

@@ -16,9 +16,10 @@ describe('objectMap', function () {
 
   it('should call `callback` once for each element of `object`', function () {
     expect(callback.callCount).to.equal(values.length)
-    callback.getCalls().forEach(function (call, index) {
-      sinon.assert.calledWithExactly(call, values[index], keys[index], object)
-    })
+    var calls = callback.getCalls()
+    for (var i = 0; i < calls.length; i++) {
+      sinon.assert.calledWithExactly(calls[i], values[i], keys[i], object)
+    }
   })
 
   it('should call `callback`, bound to `context`', function () {

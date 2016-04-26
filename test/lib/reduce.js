@@ -12,10 +12,11 @@ describe('reduce', function () {
 
   it('should call `callback` once for each element of `array`', function () {
     expect(callback.callCount).to.equal(array.length)
-    callback.getCalls().forEach(function (call, index, calls) {
-      var memo = index > 0 ? calls[index - 1].returnValue : 0
-      sinon.assert.calledWithExactly(call, memo, array[index], index, array)
-    })
+    var calls = callback.getCalls()
+    for (var i = 0; i < calls.length; i++) {
+      var memo = i > 0 ? calls[i - 1].returnValue : 0
+      sinon.assert.calledWithExactly(calls[i], memo, array[i], i, array)
+    }
   })
 
   it('should return the reduced value', function () {

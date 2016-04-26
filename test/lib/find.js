@@ -12,9 +12,10 @@ describe('find', function () {
 
   it('should call `callback` for each element of `array`, until a match is found', function () {
     expect(callback.callCount).to.equal(2)
-    callback.getCalls().forEach(function (call, index) {
-      sinon.assert.calledWithExactly(call, array[index], index, array)
-    })
+    var calls = callback.getCalls()
+    for (var i = 0; i < calls.length; i++) {
+      sinon.assert.calledWithExactly(calls[i], array[i], i, array)
+    }
   })
 
   it('should call `callback` bound on `context`', function () {

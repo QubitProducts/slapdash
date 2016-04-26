@@ -12,6 +12,8 @@ describe('pluck', function () {
   it('should return an array of same length', function () {
     expect(actual).to.be.an('array')
     expect(actual).to.have.length(array.length)
-    expect(actual).to.eql([ 1, 2, undefined ])
+    expect(actual[0]).to.eql(1)
+    expect(actual[1]).to.eql(2)
+    expect(actual[2]).to.eql(undefined)
   })
 })
