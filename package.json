@@ -1,6 +1,6 @@
 {
   "name": "slapdash",
-  "version": "0.4.0",
+  "version": "0.3.0",
   "description": "Slapdash is a lightweight utility JavaScript utility belt, inspired heavily by lodash",
   "main": "index.js",
   "directories": {
