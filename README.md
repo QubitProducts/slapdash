@@ -1,11 +1,5 @@
 # Slapdash
 
-[![Slapdash](http://i.imgur.com/bcHchs7.jpg)][slapdash-transformers]
-
-> Slapdash's prodigious speed allows him to do everything quickly—which he likes, because anything else would require effort.
->
-> -- [Transformers Wiki][slapdash-transformers]
-
 ## What?
 
 [![Codeship Status for qubitdigital/slapdash](https://codeship.com/projects/3775dd10-dd64-0133-6ef5-6a9399c471b8/status?branch=master)][codeship]
@@ -15,17 +9,47 @@ Slapdash is a lightweight JavaScript utility belt, inspired heavily by
 
  - Perform as quickly as possible
  - Be as small as possible
- - Be compatible with Internet Explorer 9 and up ([ES5][es5], essentially)
+ - Be compatible with Internet Explorer 8 and up
  - Allow methods to be required individually
+ - Protect from browser native overrides
+
+ [![Slapdash](http://i.imgur.com/bcHchs7.jpg)][slapdash-transformers]
+
+ > Slapdash's prodigious speed allows him to do everything quickly—which he likes, because anything else would require effort.
+ >
+ > -- [Transformers Wiki][slapdash-transformers]
 
 ## Why?
 
- - Nobody cares about IE8 any more. Nobody wants to care about IE9 either, but unfortunately some people are still using it.
- - Even with a custom build, lodash 2 is a monolithic JS bundle - it's better if we can require individual methods from it to keep our bundles smaller.
+ - IE8/9 are a distant memory for most web developers, but unfortunately for some of us they remain a waking nightmare. Slapdash aims to change this.
+ - Underscore is bloated. Lodash is overweight. Slapdash is *svelte*.
+ - We don't all have control over our execution environment. Maybe you're writing script for deployment on 3rd party sites - maybe that 3rd party decides to override `Function::bind` with something incompatible? Don't worry. Slapdash has your back.
 
-## Facts & Figures
+## How?
 
- - When bundled using `webpack -p`, the output filesize is a tiny **2kb** (only **674 bytes** when gzipped)!
+ - IE8 is crap by modern standards. I mean, it doesn't even have `Object.keys`!. So, Slapdash [*featurefills*][featurefills] missing native methods without touching any prototypes.
+ - By not implementing the full lodash/underscore API, a lot of cruft can be removed. This includes, for example, supporting strings in place of callbacks in `map`/`each`/`filter` etc.
+ - Where possible, slapdash uses browser native methods to boost performance. However, the first time it attempts to get a native method, it will make sure that it is the one it expected. If another script has tampered with the prototype (or doesn't provide one at all), we fall back to our own (small, performant) implementation.
+
+# Usage
+
+    npm install slapdash
+
+You can then import the whole thing:
+
+    var _ = require('slapdash')
+
+    // or
+
+    import _ from 'slapdash'
+
+or cherrypick the methods you want:
+
+    var map = require('slapdash/lib/map')
+
+    // or
+
+    import map from 'slapdash/lib/map'
 
 # API Overview
 
@@ -69,7 +93,7 @@ As such:
 
 Based on this, the API will look something like:
 
-## API Definition
+## Methods
 
 ### `bind(method, thisArg)`
 
@@ -174,6 +198,18 @@ Returns the contents of `array`, minus anything in `exclude`.
   - `exclude` may only be a single, flat array. Unlike lodash's version, this does not flatten the arguments list together.
   - If an empty (or falsey) `exclude` parameter is passed, the original `array` will be returned. Bear this in mind if you are mutating the returned array.
 
+### `filter(array, predicate, context)`
+
+Returns a new array containing the items in `array` for which `predicate` returns true. If `context` is supplied, it will be passed to `callback` as `this`.
+
+#### Notes
+
+  - Only supports arrays, not objects. If there's demand for an `objectFilter` method, raise an issue/PR.
+
+### `indexOf(array, item)`
+
+This is basically just a featurefill for IE8, needed for `without`.
+
 [slapdash-transformers]: http://tfwiki.net/wiki/Slap_Dash
 [lodash]: http://lodash.com/
 [codeship]: https://codeship.com/projects/144381
@@ -185,3 +221,4 @@ Returns the contents of `array`, minus anything in `exclude`.
 [mdn-Array-filter]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/filter
 [mdn-Array-reduce]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/reduce
 [mdn-Array-forEach]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/forEach
+[featurefills]: https://toddmotto.com/polyfills-suck-use-a-featurefill-instead/
