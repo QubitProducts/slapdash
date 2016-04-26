@@ -16,17 +16,21 @@
     "karma-firefox-launcher": "^0.1.7",
     "karma-mocha": "^0.2.2",
     "karma-phantomjs-launcher": "^1.0.0",
-    "karma-sinon": "^1.0.4",
+    "karma-sauce-launcher": "^0.3.1",
+    "karma-sinon-ie": "^2.0.0-rc10",
     "karma-sourcemap-loader": "^0.3.7",
     "mocha": "^2.4.5",
     "phantomjs-prebuilt": "^2.1.7",
     "sinon": "^1.17.3",
     "standard": "^6.0.8",
-    "watchify": "^3.7.0"
+    "uglifyjs": "^2.4.10",
+    "watchify": "^3.7.0",
+    "webpack": "^1.13.0"
   },
   "scripts": {
     "lint": "./node_modules/.bin/standard ./lib",
     "test-js": "./node_modules/.bin/karma start --single-run",
+    "test-saucelabs": "./node_modules/.bin/karma start --single-run --browsers=sl_ie_8,sl_ie_9,sl_ie_10 --reporters dots,saucelabs",
     "test": "npm run lint && npm run test-js",
     "test-watch": "./node_modules/.bin/karma start --watch"
   },

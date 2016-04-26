@@ -13,9 +13,10 @@ describe('each', function () {
 
   it('should call `callback` once for each element of `array`', function () {
     expect(callback.callCount).to.equal(array.length)
-    callback.getCalls().forEach(function (call, index) {
-      sinon.assert.calledWithExactly(call, array[index], index, array)
-    })
+    var calls = callback.getCalls()
+    for (var i = 0; i < calls.length; i++) {
+      sinon.assert.calledWithExactly(calls[i], array[i], i, array)
+    }
   })
 
   it('should call `callback`, bound to `context`', function () {
@@ -23,8 +24,9 @@ describe('each', function () {
   })
 
   it('should always return `undefined`', function () {
-    callback.getCalls().forEach(function (call) {
-      expect(call.returnValue).to.equal(undefined)
-    })
+    var calls = callback.getCalls()
+    for (var i = 0; i < calls.length; i++) {
+      expect(calls[i].returnValue).to.equal(undefined)
+    }
   })
 })
