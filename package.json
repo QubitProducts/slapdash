@@ -30,7 +30,7 @@
   "scripts": {
     "lint": "./node_modules/.bin/standard ./lib",
     "test-js": "./node_modules/.bin/karma start --single-run",
-    "test-saucelabs": "./node_modules/.bin/karma start --single-run --browsers=sl_ios_safari,sl_android_40,sl_ie_8,sl_ie_9,sl_ie_10 --reporters dots,saucelabs",
+    "test-saucelabs": "./node_modules/.bin/karma start --single-run --browsers=sl_ie_8,sl_ie_9,sl_ie_10 --reporters dots,saucelabs",
     "test": "npm run lint && npm run test-js",
     "test-watch": "./node_modules/.bin/karma start --watch"
   },
