@@ -2,11 +2,11 @@ module.exports = function (config) {
   config.set({
     frameworks: ['browserify', 'mocha', 'expect', 'sinon'],
 
-    files: ['test/index.js'],
+    files: ['test/**/*.js'],
 
     // add webpack as preprocessor
     preprocessors: {
-      'test/index.js': ['browserify', 'sourcemap']
+      'test/**/*.js': ['browserify', 'sourcemap']
     },
 
     webpack: {
