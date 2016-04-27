@@ -1,4 +1,4 @@
-var pluck = require('../../src/pluck')
+var pluck = require('../src/pluck')
 
 var array = [ { b: 2, a: 1 }, { a: 2 }, { b: 3 } ]
 

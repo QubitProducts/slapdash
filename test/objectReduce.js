@@ -1,5 +1,5 @@
-var objectReduce = require('../../src/objectReduce')
-var each = require('../../src/each')
+var objectReduce = require('../src/objectReduce')
+var each = require('../src/each')
 
 var object = { a: 1, b: 2, c: 3 }
 var values = [1, 2, 3]

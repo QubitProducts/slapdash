@@ -1,29 +1,21 @@
-var objectEach = require('../../src/objectEach')
+var each = require('../src/each')
 
-var object = {
-  hello: 'world',
-  awesome: 'yes',
-  slap: 'dash'
-}
+var array = [ 'hello', 'there', 'tests' ]
 
-var keys = ['hello', 'awesome', 'slap']
-var values = ['world', 'yes', 'dash']
-
-describe('objectEach', function () {
+describe('each', function () {
   var callback, context
 
   beforeEach(function () {
     callback = sinon.spy()
     context = { success: true }
-    objectEach(object, callback, context)
+    each(array, callback, context)
   })
 
-  it('should call `callback` once for each element of `object`', function () {
-    expect(callback.callCount).to.equal(keys.length)
-
+  it('should call `callback` once for each element of `array`', function () {
+    expect(callback.callCount).to.equal(array.length)
     var calls = callback.getCalls()
     for (var i = 0; i < calls.length; i++) {
-      sinon.assert.calledWithExactly(calls[i], values[i], keys[i], object)
+      sinon.assert.calledWithExactly(calls[i], array[i], i, array)
     }
   })
 

@@ -1,4 +1,4 @@
-var keys = require('../../src/keys')
+var keys = require('../src/keys')
 
 describe('keys', function () {
   var object = { z: 0, a: 1, b: 2, c: 3 }

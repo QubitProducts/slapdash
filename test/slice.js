@@ -1,4 +1,4 @@
-var slice = require('../../src/slice')
+var slice = require('../src/slice')
 
 describe('slice', function () {
   var baseArray = [1, 2, 3, 4, 5]

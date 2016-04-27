@@ -1,4 +1,4 @@
-var find = require('../../src/find')
+var find = require('../src/find')
 
 describe('find', function () {
   var array = [1, 10, 100]
