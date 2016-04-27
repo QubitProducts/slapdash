@@ -2,7 +2,7 @@
 
 ## What?
 
-[![Codeship Status for qubitdigital/slapdash](https://codeship.com/projects/3775dd10-dd64-0133-6ef5-6a9399c471b8/status?branch=master)][codeship]
+[![Codeship Status for Slapdash](https://codeship.com/projects/3775dd10-dd64-0133-6ef5-6a9399c471b8/status?branch=master)][codeship]
 
 Slapdash is a lightweight JavaScript utility belt, inspired heavily by
 [lodash][lodash], with the following goals:
@@ -33,7 +33,7 @@ Slapdash is a lightweight JavaScript utility belt, inspired heavily by
 
 # Usage
 
-    npm install @qubit/slapdash
+    npm install slapdash
 
 You can then import the whole thing:
 

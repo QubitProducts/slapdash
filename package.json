@@ -1,5 +1,5 @@
 {
-  "name": "@qubit/slapdash",
+  "name": "slapdash",
   "version": "0.3.1",
   "description": "Slapdash is a lightweight utility JavaScript utility belt, inspired heavily by lodash",
   "main": "index.js",
@@ -19,9 +19,7 @@
     "phantomjs-prebuilt": "^2.1.7",
     "sinon": "^1.17.3",
     "standard": "^6.0.8",
-    "uglifyjs": "^2.4.10",
-    "watchify": "^3.7.0",
-    "webpack": "^1.13.0"
+    "watchify": "^3.7.0"
   },
   "scripts": {
     "lint": "./node_modules/.bin/standard ./src",
