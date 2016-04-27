@@ -21,7 +21,7 @@ describe('reduce', function () {
 
   it('should return the reduced value', function () {
     var sum = 0
-    for (var i = 0, len = array.length; i < len; i++) {
+    for (var i = 0, length = array.length; i < length; i++) {
       sum += array[i]
     }
     expect(actual).to.equal(sum)
