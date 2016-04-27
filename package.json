@@ -3,10 +3,6 @@
   "version": "0.3.1",
   "description": "Slapdash is a lightweight utility JavaScript utility belt, inspired heavily by lodash",
   "main": "index.js",
-  "directories": {
-    "test": "test",
-    "lib": "lib"
-  },
   "devDependencies": {
     "browserify": "^13.0.0",
     "karma": "^0.13.22",
@@ -28,7 +24,7 @@
     "webpack": "^1.13.0"
   },
   "scripts": {
-    "lint": "./node_modules/.bin/standard ./lib",
+    "lint": "./node_modules/.bin/standard ./src",
     "test-js": "./node_modules/.bin/karma start --single-run",
     "test-saucelabs": "./node_modules/.bin/karma start --single-run --browsers=sl_ie_8,sl_ie_9,sl_ie_10 --reporters dots,saucelabs",
     "test": "npm run lint && npm run test-js",

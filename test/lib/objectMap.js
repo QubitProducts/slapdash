@@ -1,4 +1,4 @@
-var objectMap = require('../../lib/objectMap')
+var objectMap = require('../../src/objectMap')
 
 var object = { a: 1, b: 2, c: 3 }
 

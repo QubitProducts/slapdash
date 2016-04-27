@@ -1,4 +1,4 @@
-var getNative = require('../../../lib/util/getNative')
+var getNative = require('../../../src/util/getNative')
 
 var testCases = [
   'Array.prototype.shift',

@@ -1,4 +1,4 @@
-var isNative = require('../../../lib/util/isNative')
+var isNative = require('../../../src/util/isNative')
 
 var testCases = {
   'Array.prototype.shift': true,

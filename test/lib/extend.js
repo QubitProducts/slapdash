@@ -1,4 +1,4 @@
-var extend = require('../../lib/extend')
+var extend = require('../../src/extend')
 
 describe('extend', function () {
   var target

@@ -1,4 +1,4 @@
-var without = require('../../lib/without')
+var without = require('../../src/without')
 
 var array = [ 'hello', 'there', 'tests' ]
 

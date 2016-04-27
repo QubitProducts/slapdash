@@ -5,7 +5,7 @@ describe('bind', function () {
   var bind, spy
 
   if (HAS_NATIVE_BIND) {
-    bind = require('../../lib/bind')
+    bind = require('../../src/bind')
     describe('(where native available)', function () {
       beforeEach(function () {
         spy = sinon.stub(Function.prototype, 'bind')
@@ -25,7 +25,7 @@ describe('bind', function () {
     })
   } else {
     console.warn('No native Function.prototype.bind found - skipping some tests')
-    bind = require('../../lib/bind')
+    bind = require('../../src/bind')
   }
 
   it('should bind the first argument as context', function () {

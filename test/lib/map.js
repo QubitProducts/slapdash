@@ -1,4 +1,4 @@
-var map = require('../../lib/map')
+var map = require('../../src/map')
 
 var array = [ 1, 2, 3 ]
 

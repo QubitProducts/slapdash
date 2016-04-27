@@ -1,4 +1,4 @@
-var reduce = require('../../lib/reduce')
+var reduce = require('../../src/reduce')
 
 var array = [ 1, 2, 3 ]
 

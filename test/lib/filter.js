@@ -1,4 +1,4 @@
-var filter = require('../../lib/filter')
+var filter = require('../../src/filter')
 
 var array = [ 'hello', 'there', 'tests' ]
 

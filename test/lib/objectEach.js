@@ -1,4 +1,4 @@
-var objectEach = require('../../lib/objectEach')
+var objectEach = require('../../src/objectEach')
 
 var object = {
   hello: 'world',

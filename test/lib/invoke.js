@@ -1,4 +1,4 @@
-var invoke = require('../../lib/invoke')
+var invoke = require('../../src/invoke')
 
 describe('invoke', function () {
   var callback

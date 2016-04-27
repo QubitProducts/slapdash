@@ -1,4 +1,4 @@
-var each = require('../../lib/each')
+var each = require('../../src/each')
 
 var array = [ 'hello', 'there', 'tests' ]
 
