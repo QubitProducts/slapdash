@@ -1,7 +1,7 @@
 var keys = require('../keys')
 
-module.exports = function makeObjectHandler (method) {
-  return function objectHandler (object, callback, context) {
+module.exports = function objectHandler (method) {
+  return function objectHandlerInstance (object, callback, context) {
     return method(keys(object), translate(object, callback, context), context)
   }
 }
