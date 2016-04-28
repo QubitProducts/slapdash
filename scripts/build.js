@@ -14,7 +14,7 @@
 
 var fs = require('fs')
 var path = require('path')
-var package = require(path.resolve(__dirname, '..', 'package.json'))
+var pkg = require(path.resolve(__dirname, '..', 'package.json'))
 
 var JS_SUFFIX = /\.js$/
 var REQUIRE_STMT = /^var\s+([^=\s]+)\s*=\s*require\(\'([^\']+)\'\);?/
@@ -76,8 +76,8 @@ function generateIndex (methods) {
     .filter((mod) => mod.isCore)
     .map((mod, i, arr) => `  "${mod.name}": ${mod.name}`)
     .concat([
-      `  "name": "${package.name}"`,
-      `  "version": "${package.version}"`
+      `  "name": "${pkg.name}"`,
+      `  "version": "${pkg.version}"`
     ])
     .join(',\n')
 }
