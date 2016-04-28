@@ -5,12 +5,10 @@ module.exports = isNative(filter)
     return filter.call(array, callback, context)
   }
   : function filter (array, callback, context) {
-    var length = array.length
+    var l = array.length
     var output = []
-    for (var i = 0; i < length; i++) {
-      if (callback.call(context, array[i], i, array)) {
-        output.push(array[i])
-      }
+    for (var i = 0; i < l; i++) {
+      if (callback.call(context, array[i], i, array)) output.push(array[i])
     }
     return output
   }

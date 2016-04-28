@@ -1,6 +1,6 @@
 var slapdash = require('../')
 
-var methods = ['bind', 'each', 'extend', 'filter', 'find', 'indexOf', 'invoke', 'keys', 'map', 'objectEach', 'objectMap', 'objectReduce', 'pluck', 'reduce', 'slice', 'without']
+var methods = ['bind', 'each', 'extend', 'filter', 'find', 'indexOf', 'invoke', 'keys', 'map', 'objectEach', 'objectMap', 'objectReduce', 'pluck', 'reduce', 'slice']
 
 for (var i = 0; i < methods.length; i++) {
   (function (methodName) {

@@ -5,8 +5,6 @@ module.exports = isNative(forEach)
     return forEach.call(array, callback, context)
   }
   : function each (array, callback, context) {
-    var length = array.length
-    for (var i = 0; i < length; i++) {
-      callback.call(context, array[i], i, array)
-    }
+    var l = array.length
+    for (var i = 0; i < l; i++) callback.call(context, array[i], i, array)
   }

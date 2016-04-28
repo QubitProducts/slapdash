@@ -3,14 +3,10 @@ var assign = Object.assign
 module.exports = isNative(assign)
   ? assign
   : function assign (target) {
-    var sourcesLength = arguments.length
-    for (var i = 1; i < sourcesLength; i++) {
+    var l = arguments.length
+    for (var i = 1; i < l; i++) {
       var source = arguments[i]
-      for (var j in source) {
-        if (source.hasOwnProperty(j)) {
-          target[j] = source[j]
-        }
-      }
+      for (var j in source) if (source.hasOwnProperty(j)) target[j] = source[j]
     }
 
     return target

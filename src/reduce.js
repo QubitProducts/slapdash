@@ -6,11 +6,7 @@ module.exports = isNative(reduce)
   }
   : function reduce (array, callback, initialValue) {
     var output = initialValue
-    var length = array.length
-
-    for (var i = 0; i < length; i++) {
-      output = callback(output, array[i], i, array)
-    }
-
+    var l = array.length
+    for (var i = 0; i < l; i++) output = callback(output, array[i], i, array)
     return output
   }

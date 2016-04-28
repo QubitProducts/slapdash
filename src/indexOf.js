@@ -6,11 +6,9 @@ module.exports = isNative(indexOf)
     return indexOf.call(array, item)
   }
   : function indexOf (array, item) {
-    var length = array.length
-    for (var i = 0; i < length; i++) {
-      if (array[i] === item) {
-        return i
-      }
+    var l = array.length
+    for (var i = 0; i < l; i++) {
+      if (array[i] === item) return i
     }
     return -1
   }

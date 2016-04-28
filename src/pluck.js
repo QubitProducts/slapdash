@@ -1,8 +1,6 @@
 module.exports = function pluck (array, key) {
-  var length = array.length
-  var values = new Array(length)
-  for (var i = 0; i < length; i++) {
-    values[i] = array[i] ? array[i][key] : undefined
-  }
+  var l = array.length
+  var values = []
+  for (var i = 0; i < l; i++) if (array[i]) values[i] = array[i][key]
   return values
 }

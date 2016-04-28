@@ -5,9 +5,9 @@ module.exports = isNative(map)
     return map.call(array, callback, context)
   }
   : function map (array, callback, context) {
-    var length = array.length
-    var output = new Array(length)
-    for (var i = 0; i < length; i++) {
+    var l = array.length
+    var output = new Array(l)
+    for (var i = 0; i < l; i++) {
       output[i] = callback.call(context, array[i], i, array)
     }
     return output

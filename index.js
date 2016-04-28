@@ -11,7 +11,6 @@ module.exports = {
   reduce: require('./src/reduce'),
   objectReduce: require('./src/objectReduce'),
   invoke: require('./src/invoke'),
-  without: require('./src/without'),
   slice: require('./src/slice'),
   indexOf: require('./src/indexOf'),
   keys: require('./src/keys'),

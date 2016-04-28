@@ -5,26 +5,18 @@ var slicer = isNative(slice)
     return slice.call(array, begin, end)
   }
   : function slice (array, start, end) {
-    var length = array.length
+    var l = array.length
 
     // Handle negative values for `begin`
-    if (start < 0) {
-      start = Math.max(0, length + start)
-    }
+    if (start < 0) start = Math.max(0, l + start)
 
     // Handle negative values for `end`
-    var upTo = end < 0 ? length + end : Math.min(end, length)
-    var size = upTo - start
+    var size = (end < 0 ? l + end : Math.min(end, l)) - start
 
-    if (size <= 1) {
-      return []
-    }
+    if (size <= 1) return []
 
     var sliced = new Array(size)
-    var get = array.charAt || function valueAt (index) { return array[index] }
-    for (var i = size; i > start; i--) {
-      sliced[i] = get(i)
-    }
+    for (var i = size; i > start; i--) sliced[i] = array[i]
     return sliced
   }
 

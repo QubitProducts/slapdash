@@ -7,7 +7,8 @@ module.exports = isNative(find)
   : function find (array, callback, context) {
     // Here, `this` is the array we're iterating over,
     // and `context` is passed to the `callback`
-    for (var i = 0, length = array.length; i < length; i++) {
+    var l = array.length
+    for (var i = 0; i < l; i++) {
       if (callback.call(context, array[i], i, array)) return array[i]
     }
   }
