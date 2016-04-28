@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * Slapdash buildchain
  * ===
@@ -19,7 +20,8 @@ var pkg = require(path.resolve(__dirname, '..', 'package.json'))
 var JS_SUFFIX = /\.js$/
 var REQUIRE_STMT = /^var\s+([^=\s]+)\s*=\s*require\(\'([^\']+)\'\);?/
 var INLINE_COMMENT = /\s*\/\/.+$/
-var MODULE_EXPORT_STMT = /^module\.exports\s*=\s*/g
+var MODULE_EXPORT_FN_STMT = /^module\.exports\s*=\s*function/g
+var MODULE_EXPORT_GET_NATIVE_STMT = /^module\.exports\s*=\s*/g
 var MODULE_EXPORT_EXTEND = /^module\.exports\./
 var SRC_DIR = path.resolve(__dirname, '..', 'src')
 
@@ -57,7 +59,8 @@ function parseModule (module) {
     src: src
       .filter((line) => line && !line.match(REQUIRE_STMT))
       .map((line) => line
-        .replace(MODULE_EXPORT_STMT, `var ${name} = `)
+        .replace(MODULE_EXPORT_FN_STMT, 'function')
+        .replace(MODULE_EXPORT_GET_NATIVE_STMT, `var ${name} = `)
         .replace(MODULE_EXPORT_EXTEND, `${name}.`)
         .replace(INLINE_COMMENT, '')
       )

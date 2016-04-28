@@ -1,11 +1,13 @@
-var getNative = require('./util/getNative')
-
-module.exports = getNative('Object.keys', function keysFeatureFill (object) {
-  var keys = []
-  for (var key in object) {
-    if (object.hasOwnProperty(key)) {
-      keys.push(key)
+var isNative = require('./util/isNative')
+var objKeys = Object.keys
+module.exports = isNative(objKeys)
+  ? objKeys
+  : function keysFeatureFill (object) {
+    var keys = []
+    for (var key in object) {
+      if (object.hasOwnProperty(key)) {
+        keys.push(key)
+      }
     }
+    return keys
   }
-  return keys
-})

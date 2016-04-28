@@ -1,4 +1,4 @@
-var slapdash = require('../test')
+var slapdash = require('../')
 
 var methods = ['bind', 'each', 'extend', 'filter', 'find', 'indexOf', 'invoke', 'keys', 'map', 'objectEach', 'objectMap', 'objectReduce', 'pluck', 'reduce', 'slice', 'without']
 
