@@ -15,5 +15,7 @@ module.exports = {
   slice: require('./lib/slice'),
   indexOf: require('./lib/indexOf'),
   keys: require('./lib/keys'),
+  isMatch: require('./lib/isMatch'),
+  matches: require('./lib/matches'),
   name: 'slapdash'
 }
