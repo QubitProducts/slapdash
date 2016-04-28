@@ -45,55 +45,25 @@ You can then import the whole thing:
 
 or cherrypick the methods you want:
 
-    var map = require('slapdash/lib/map')
+    var map = require('slapdash/src/map')
 
     // or
 
-    import map from 'slapdash/lib/map'
-
-# API Overview
-
-After analyzing the usage of mini_lodash in deliver-lib, we can draw the following conclusions:
-
- - These methods are used 10 or more times in our codebase.
-
-   - `bind`: Used everywhere, extremely necessary. Shouldn't ever use the native.
-   - `extend`: **Shallow** extend! This will use `Object.assign` where available.
-   - `each`: Wrapper around [`Array.prototype.forEach`][mdn-Array-forEach].
-   - `map`: Wrapper around [`Array.prototype.map`][mdn-Array-map]
-   - `findWhere`: Alias of `find`
-   - `chain`: Unlikely to implement this, will refactor usage of this where found.
-   - `find`: Wrapper around [`Array.prototype.find`][mdn-Array-find] where available
-   - `pluck`: This is just `map` with a string callback.
-
- - These methods are used between 5-10 times:
-
-   - `reduce`: Wrapper around [`Array.prototype.reduce`][mdn-Array-reduce]
-   - `invoke`: Basically just `map`
-   - `keys`: `Object.keys` man. Come on.
-   - `without`: Wrapper around [`Array.prototype.filter`][mdn-Array-filter]
-   - `isNumber`: `typeof x === 'number'`
-   - `isFunction`: `typeof x === 'function'`
-
- - The rest are barely used; 4 or fewer times:
-
-   - `isObject`, `sortBy`, `filter`, `has`, `isArray`, `toArray`, `contains`, `times`, `result`, `flatten`, `clone`, `throttle`, `isEmpty`, `compact`, `every`, `isUndefined`, `compose`, `countBy`, `defer`, `wrap`, `max`, `unique`, `template`, `once`, `isString`, `indexOf`, `start`, `size`, `groupBy`, `difference`, `union`, `reject`, `values`, `rest`, `defaults`, `isBoolean`, `omit`, `object`, `shuffle`, `range`, `identity`
+    import map from 'slapdash/src/map'
 
 ## Design Decisions
 
-One of the most problematic aspects of using lodash's common methods (like `map`, `each`, `reduce`, et. al.) is that they will operate on both arrays and objects, and that they accept callbacks in the form of strings and objects, as well as functions. This means that:
+One of the most problematic aspects of using lodash's common methods (like `map`, `each`, `reduce`, et. al.) is that they can operate on *either* arrays or objects, and that they accept callbacks in the form of strings and objects, as well as simply functions. This means that:
 
- - There are subtleties to the behavior of each method depending on whether the operand is an array or an object, and whether the callback is a function, string or object.
- - Reading another developer's code which uses these methods can be difficult to reason about. Unless the operand in question is declared near to where it is used, it can be difficult to determine what type it actually is.
+ - There are subtleties to the behavior of each method depending on the types of the operands.
+ - Reading code which uses these methods can be difficult to reason about. Unless the operand in question is declared near to where it is used (or there is an assertion/invariant to validate the type), it can be difficult to determine what type it actually is.
 
 As such:
 
- - Slapdash's 'collection' methods will be split into two sets - array and object. Each of lodash's collection methods will be implemented to support arrays only, with an object-specific version provided separately.
+ - Slapdash's 'collection' methods are split into two sets - array and object. Each of lodash's collection methods will be implemented to support arrays only, with an object-specific version provided separately.
  - Callbacks supplied to these methods may **only** be functions. For most common use cases involving a non-function callback, an alternative will be provided.
 
-Based on this, the API will look something like:
-
-## Methods
+## API Reference
 
 ### `bind(method, context)`
 
@@ -188,15 +158,6 @@ Returns a new array, containing the result of calling each member of `array`'s `
 #### Notes
 
   - This only supports arrays, not objects.
-
-### `without(array, exclude)`
-
-Returns the contents of `array`, minus anything in `exclude`.
-
-#### Notes
-
-  - `exclude` may only be a single, flat array. Unlike lodash's version, this does not flatten the arguments list together.
-  - If an empty (or falsey) `exclude` parameter is passed, the original `array` will be returned. Bear this in mind if you are mutating the returned array.
 
 ### `filter(array, predicate, context)`
 
