@@ -19,7 +19,9 @@
     "phantomjs-prebuilt": "^2.1.7",
     "sinon": "^1.17.3",
     "standard": "^6.0.8",
-    "watchify": "^3.7.0"
+    "uglify-js": "^2.6.2",
+    "watchify": "^3.7.0",
+    "webpack": "^1.13.0"
   },
   "scripts": {
     "lint": "./node_modules/.bin/standard ./src",

@@ -13,5 +13,4 @@ var arrayFind = getNative(
       if (callback.call(context, this[i], i, this)) return this[i]
     }
   }
-
 )

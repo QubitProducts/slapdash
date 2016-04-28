@@ -14,10 +14,11 @@
 
 var fs = require('fs')
 var path = require('path')
+var package = require(path.resolve(__dirname, '..', 'package.json'))
 
-var JS_SUFFIX = /\.js$/g
+var JS_SUFFIX = /\.js$/
 var REQUIRE_STMT = /^var\s+([^=\s]+)\s*=\s*require\(\'([^\']+)\'\);?/
-var COMMENT_STMT = /^\/\//
+var INLINE_COMMENT = /\s*\/\/.+$/
 var MODULE_EXPORT_STMT = /^module\.exports\s*=\s*/g
 var MODULE_EXPORT_EXTEND = /^module\.exports\./
 var SRC_DIR = path.resolve(__dirname, '..', 'src')
@@ -54,11 +55,13 @@ function parseModule (module) {
     path: module.path,
     isCore: module.isCore,
     src: src
-      .filter((line) => line && !line.match(REQUIRE_STMT) && !line.match(COMMENT_STMT))
+      .filter((line) => line && !line.match(REQUIRE_STMT))
       .map((line) => line
         .replace(MODULE_EXPORT_STMT, `var ${name} = `)
         .replace(MODULE_EXPORT_EXTEND, `${name}.`)
+        .replace(INLINE_COMMENT, '')
       )
+      .filter((line) => line)
       .join('\n'),
     deps: src
       .map((line) => line.match(REQUIRE_STMT))
@@ -71,15 +74,25 @@ function generateIndex (methods) {
   return Object.keys(methods)
     .map((name) => methods[name])
     .filter((mod) => mod.isCore)
-    .map((mod, i, arr) => `  "${mod.name}": ${mod.name}${i < arr.length - 1 ? ',' : ''}`)
-    .join('\n')
+    .map((mod, i, arr) => `  "${mod.name}": ${mod.name}`)
+    .concat([
+      `  "name": "${package.name}"`,
+      `  "version": "${package.version}"`
+    ])
+    .join(',\n')
 }
 
-var methods = getMethods()
+function generateBundle () {
+  var methods = getMethods()
 
-var output = Object.keys(methods)
-  .map((name) => methods[name].src)
-  .concat([ 'module.exports = {', generateIndex(methods), '}' ])
-  .join('\n')
+  return Object.keys(methods)
+    .map((name) => `// ${methods[name].path}\n${methods[name].src}`)
+    .concat([ `module.exports = {\n${generateIndex(methods)}\n}` ])
+    .join('\n\n')
+}
 
-console.log(output)
+if (module.parent) {
+  module.exports = generateBundle()
+} else {
+  console.log(generateBundle())
+}

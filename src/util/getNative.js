@@ -1,9 +1,9 @@
 var isNative = require('./isNative')
-var cache = {}
+var nativeMethodsCache = {}
 var global = Function('return this')() // eslint-disable-line no-new-func
 
 module.exports = function getNative (name, fallback) {
-  if (!cache[name]) {
+  if (!nativeMethodsCache[name]) {
     var nameParts = name.split(/\./g)
     var namePartsLength = nameParts.length
     var method = global
@@ -11,7 +11,8 @@ module.exports = function getNative (name, fallback) {
       method = method && method[nameParts[i]]
     }
 
-    cache[name] = (method && isNative(method)) ? method : fallback
+    nativeMethodsCache[name] = (method && isNative(method)) ? method : fallback
   }
-  return cache[name]
+
+  return nativeMethodsCache[name]
 }
