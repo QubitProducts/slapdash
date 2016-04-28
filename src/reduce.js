@@ -1,10 +1,10 @@
 var isNative = require('./util/isNative')
-var arrReduce = Array.prototype.reduce
-module.exports = isNative(arrReduce)
-  ? function reduce (array, callback, initialValue) {
-    return arrReduce.call(array, callback, initialValue)
+var reduce = Array.prototype.reduce
+module.exports = isNative(reduce)
+  ? function nativeReduce (array, callback, initialValue) {
+    return reduce.call(array, callback, initialValue)
   }
-  : function reduceFeatureFill (array, callback, initialValue) {
+  : function reduce (array, callback, initialValue) {
     var output = initialValue
     var length = array.length
 

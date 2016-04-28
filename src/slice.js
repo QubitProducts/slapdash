@@ -1,19 +1,10 @@
 var isNative = require('./util/isNative')
-var arrSlice = Array.prototype.slice
-
-module.exports = function slice (array, begin, end) {
-  // If begin or end are undefined, using `arraySlice.call` in IE8 will silently
-  // return an empty array
-  begin = begin || 0
-  end = typeof end === 'number' ? end : array.length
-  return slicer(array, begin, end)
-}
-
-var slicer = isNative(arrSlice)
+var slice = Array.prototype.slice
+var slicer = isNative(slice)
   ? function nativeSlice (array, begin, end) {
-    return arrSlice.call(array, begin, end)
+    return slice.call(array, begin, end)
   }
-  : function arraySliceFeaturefill (array, start, end) {
+  : function slice (array, start, end) {
     var length = array.length
 
     // Handle negative values for `begin`
@@ -36,3 +27,11 @@ var slicer = isNative(arrSlice)
     }
     return sliced
   }
+
+module.exports = function slice (array, begin, end) {
+  // If begin or end are undefined, using `arraySlice.call` in IE8 will silently
+  // return an empty array
+  begin = begin || 0
+  end = typeof end === 'number' ? end : array.length
+  return slicer(array, begin, end)
+}

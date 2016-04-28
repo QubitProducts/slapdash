@@ -1,5 +1,5 @@
-var objectHandler = require('./util/objectHandler')
 var map = require('./map')
+var keys = require('./keys')
 
 module.exports = function objectMap (object, callback, context) {
   var result = {}
@@ -11,4 +11,8 @@ module.exports = function objectMap (object, callback, context) {
   return result
 }
 
-module.exports.asArray = objectHandler(map)
+module.exports.asArray = function objectMapAsArray (object, callback, context) {
+  return map(keys(object), function (key) {
+    return callback.call(context, object[key], key, object)
+  }, context)
+}

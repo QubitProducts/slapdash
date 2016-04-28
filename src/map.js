@@ -1,10 +1,10 @@
 var isNative = require('./util/isNative')
-var arrMap = Array.prototype.map
-module.exports = isNative(arrMap)
-  ? function map (array, callback, context) {
-    return arrMap.call(array, callback, context)
+var map = Array.prototype.map
+module.exports = isNative(map)
+  ? function nativeMap (array, callback, context) {
+    return map.call(array, callback, context)
   }
-  : function mapFeaturefill (array, callback, context) {
+  : function map (array, callback, context) {
     var length = array.length
     var output = new Array(length)
     for (var i = 0; i < length; i++) {

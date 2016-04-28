@@ -1,8 +1,8 @@
 var isNative = require('./util/isNative')
-var objAssign = Object.assign
-module.exports = isNative(objAssign)
-  ? objAssign
-  : function assignFeatureFill (target) {
+var assign = Object.assign
+module.exports = isNative(assign)
+  ? assign
+  : function assign (target) {
     var sourcesLength = arguments.length
     for (var i = 1; i < sourcesLength; i++) {
       var source = arguments[i]

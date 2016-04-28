@@ -1,10 +1,10 @@
 var isNative = require('./util/isNative')
-var arrFilter = Array.prototype.filter
-module.exports = isNative(arrFilter)
-  ? function filter (array, callback, context) {
-    return arrFilter.call(array, callback, context)
+var filter = Array.prototype.filter
+module.exports = isNative(filter)
+  ? function nativeFilter (array, callback, context) {
+    return filter.call(array, callback, context)
   }
-  : function filterFeaturefill (array, callback, context) {
+  : function filter (array, callback, context) {
     var length = array.length
     var output = []
     for (var i = 0; i < length; i++) {

@@ -14,14 +14,14 @@ module.exports = function isNative (method) {
 }
 
 // TODO: Check if safe/featurefill
-var funcToString = Function.prototype.toString
+var toString = Function.prototype.toString
 var hasOwnProperty = Object.prototype.hasOwnProperty
 
 // Characters to escape in a regex
 var regexpCharacters = /[\\^$.*+?()[\]{}|]/g
 
 // Used to detect native methods
-var regexpIsNativeFn = funcToString.call(hasOwnProperty)
+var regexpIsNativeFn = toString.call(hasOwnProperty)
   .replace(regexpCharacters, '\\$&')
   .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?')
 var regexpIsNative = RegExp('^' + regexpIsNativeFn + '$')
@@ -47,7 +47,7 @@ function isHostObject (value) {
 function toSource (func) {
   if (func != null) {
     try {
-      return funcToString.call(func)
+      return toString.call(func)
     } catch (e) {}
     try {
       return (func + '')

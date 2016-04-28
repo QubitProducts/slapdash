@@ -19,9 +19,9 @@ var pkg = require(path.resolve(__dirname, '..', 'package.json'))
 
 var JS_SUFFIX = /\.js$/
 var REQUIRE_STMT = /^var\s+([^=\s]+)\s*=\s*require\(\'([^\']+)\'\);?/
-var INLINE_COMMENT = /\s*\/\/.+$/
-var MODULE_EXPORT_FN_STMT = /^module\.exports\s*=\s*function/g
-var MODULE_EXPORT_GET_NATIVE_STMT = /^module\.exports\s*=\s*/g
+var INLINE_COMMENT = /^\s*\/\/.+$/
+var VAR_DECL_STMT = /(^var\s+.+)|(^function\s+)/
+var MODULE_EXPORT_STMT = /^module\.exports\s*=\s*/g
 var MODULE_EXPORT_EXTEND = /^module\.exports\./
 var SRC_DIR = path.resolve(__dirname, '..', 'src')
 
@@ -36,7 +36,7 @@ function getMethods () {
       name: name.replace(/^[^\/]+\//, ''),
       path: name + '.js',
       isCore: name.indexOf('/') === -1,
-      src: getModuleSourceByName(name + '.js')
+      src: getModuleSourceByName(name + '.js').split(/\r?\n/g)
     }))
     .map(parseModule)
     .forEach((method) => { obj[method.name] = method })
@@ -46,52 +46,114 @@ function getMethods () {
 
 function getModuleSourceByName (name) {
   return fs.readFileSync(path.join(SRC_DIR, name), 'utf8')
-    .split(/\r?\n/g)
 }
 
 function parseModule (module) {
-  var src = module.src
   var name = module.name
+  var out = {
+    def: [],
+    dep: [],
+    exp: [],
+    ext: []
+  }
+
+  var nonEmptyLines = module.src.filter((line) => line && !line.match(INLINE_COMMENT))
+  var last
+  for (var i = 0; i < nonEmptyLines.length; i++) {
+    var line = nonEmptyLines[i]
+    var dep = line.match(REQUIRE_STMT)
+    var def = line.match(VAR_DECL_STMT)
+    var exp = line.match(MODULE_EXPORT_STMT)
+    var ext = line.match(MODULE_EXPORT_EXTEND)
+
+    if (dep) {
+      last = 'dep'
+      out.dep.push(line)
+    } else if (def || (last === 'def' && !exp)) {
+      last = 'def'
+      out.def.push(line)
+    } else if (exp || (last === 'exp' && !ext)) {
+      last = 'exp'
+      out.exp.push(line)
+    } else if (ext || (last === 'ext')) {
+      last = 'ext'
+      out.ext.push(line)
+    }
+  }
+
   return {
     name: name,
     path: module.path,
     isCore: module.isCore,
-    src: src
-      .filter((line) => line && !line.match(REQUIRE_STMT))
-      .map((line) => line
-        .replace(MODULE_EXPORT_FN_STMT, 'function')
-        .replace(MODULE_EXPORT_GET_NATIVE_STMT, `var ${name} = `)
-        .replace(MODULE_EXPORT_EXTEND, `${name}.`)
-        .replace(INLINE_COMMENT, '')
-      )
-      .filter((line) => line)
-      .join('\n'),
-    deps: src
-      .map((line) => line.match(REQUIRE_STMT))
-      .filter((x) => x)
-      .map((dep) => ({ name: dep[1], path: dep[2] }))
+    definitions: out.def,
+    exports: out.exp,
+    dependencies: out.dep,
+    extensions: out.ext
   }
 }
 
-function generateIndex (methods) {
-  return Object.keys(methods)
-    .map((name) => methods[name])
-    .filter((mod) => mod.isCore)
-    .map((mod, i, arr) => `  "${mod.name}": ${mod.name}`)
-    .concat([
-      `  "name": "${pkg.name}"`,
-      `  "version": "${pkg.version}"`
-    ])
-    .join(',\n')
+function deExport (exports) {
+  if (!exports.length) {
+    return []
+  }
+  return [ exports[0].replace(MODULE_EXPORT_STMT, '') ]
+    .concat(exports.slice(1))
+}
+
+function deExportExtensions (method, methods) {
+  var extensions = method.extensions
+  if (!extensions.length) {
+    return []
+  }
+  var names = methods.filter((method) => method.isCore).map((method) => method.name)
+  return [ extensions[0].replace(MODULE_EXPORT_EXTEND, `slapdash.${method.name}.`) ]
+    .concat(extensions.slice(1).map((line) => {
+      var out = line
+      names
+        .filter((name) => name !== method.name)
+        .forEach((name) => {
+          out = out.replace(new RegExp('\\b' + name + '\\b'), (x) => `slapdash.${x}`)
+        })
+      return out
+    }))
+}
+
+function remap (method, methods, exports) {
+  var names = methods.filter((method) => method.isCore).map((method) => method.name)
+  var definition = exports.map((line) => {
+    var out = line
+    names
+      .filter((name) => name !== method.name)
+      .forEach((name) => {
+        out = out.replace(new RegExp('\\b' + name + '\\b'), (x) => `slapdash.${x}`)
+      })
+    return out
+  })
+  return [`  ${method.name}: ${definition[0]}`]
+    .concat(definition.slice(1).map((line) => `  ${line}`)).join('\n')
 }
 
 function generateBundle () {
   var methods = getMethods()
-
-  return Object.keys(methods)
-    .map((name) => `// ${methods[name].path}\n${methods[name].src}`)
-    .concat([ `module.exports = {\n${generateIndex(methods)}\n}` ])
-    .join('\n\n')
+  var methodList = Object.keys(methods).map((key) => methods[key])
+  var definitions = methodList
+    .map((module) => module.definitions)
+    .reduce((memo, item) => memo.concat(item), [])
+  var helpers = methodList
+    .filter((method) => !method.isCore)
+    .map((method) => deExport(method.exports))
+    .reduce((memo, item) => memo.concat(item), [])
+  var moduleDefs = methodList
+    .filter((method) => method.isCore)
+    .map((method) => remap(method, methodList, deExport(method.exports)))
+    .concat([ `  name: '${pkg.name}'`, `  version: '${pkg.version}'` ])
+    .join(',\n')
+  var slapdash = ['var slapdash = {'].concat(moduleDefs, ['}'])
+  var extensions = methodList
+    .map((module) => deExportExtensions(module, methodList))
+    .reduce((memo, item) => memo.concat(item), [])
+  var exports = 'module.exports = slapdash'
+  return definitions.concat(helpers, slapdash, extensions, exports).join('\n')
 }
 
 if (module.parent) {

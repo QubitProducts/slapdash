@@ -1,11 +1,11 @@
 var isNative = require('./util/isNative')
-var arrIndexOf = Array.prototype.indexOf
+var indexOf = Array.prototype.indexOf
 
-module.exports = isNative(arrIndexOf)
-  ? function indexOf (array, item) {
-    return arrIndexOf.call(array, item)
+module.exports = isNative(indexOf)
+  ? function nativeIndexOf (array, item) {
+    return indexOf.call(array, item)
   }
-  : function indexOfFeaturefill (array, item) {
+  : function indexOf (array, item) {
     var length = array.length
     for (var i = 0; i < length; i++) {
       if (array[i] === item) {
