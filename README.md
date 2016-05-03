@@ -10,7 +10,6 @@ Slapdash is a lightweight JavaScript utility belt, inspired heavily by
  - Perform as quickly as possible
  - Be as small as possible
  - Be compatible with Internet Explorer 8 and up
- - Allow methods to be required individually
  - Protect from browser native overrides
 
 [![Slapdash](http://i.imgur.com/bcHchs7.jpg)][slapdash-transformers]
@@ -35,7 +34,7 @@ Slapdash is a lightweight JavaScript utility belt, inspired heavily by
 
     npm install slapdash
 
-You can then import the whole thing:
+You can then import the whole library, which when minified is only 3.1Kb (1.1Kb gzipped!)
 
     var _ = require('slapdash')
 
@@ -43,7 +42,7 @@ You can then import the whole thing:
 
     import _ from 'slapdash'
 
-or cherrypick the methods you want:
+If you find yourself only using a single method, you *can* import it directly from the source. However, **I strongly recommend against this approach**, as most bundling tools (such as webpack/browserify) add additional closures around each file you import, which both add cruft and work for the browser.
 
     var map = require('slapdash/src/map')
 
