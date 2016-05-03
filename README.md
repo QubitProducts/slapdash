@@ -1,6 +1,6 @@
 # Slapdash
 
-## What?
+### What?
 
 [![Codeship Status for Slapdash](https://codeship.com/projects/3775dd10-dd64-0133-6ef5-6a9399c471b8/status?branch=master)][codeship]
 
@@ -10,7 +10,6 @@ Slapdash is a lightweight JavaScript utility belt, inspired heavily by
  - Perform as quickly as possible
  - Be as small as possible
  - Be compatible with Internet Explorer 8 and up
- - Allow methods to be required individually
  - Protect from browser native overrides
 
 [![Slapdash](http://i.imgur.com/bcHchs7.jpg)][slapdash-transformers]
@@ -19,37 +18,46 @@ Slapdash is a lightweight JavaScript utility belt, inspired heavily by
 >
 > -- [Transformers Wiki][slapdash-transformers]
 
-## Why?
+### Why?
 
  - IE8/9 are a distant memory for most web developers, but unfortunately for some of us they remain a waking nightmare. Slapdash aims to change this.
  - Underscore is bloated. Lodash is overweight. Slapdash is *svelte*.
  - We don't all have control over our execution environment. Maybe you're writing script for deployment on 3rd party sites - maybe that 3rd party decides to override `Function::bind` with something incompatible? Don't worry. Slapdash has your back.
 
-## How?
+### How?
 
  - IE8 is crap by modern standards. I mean, it doesn't even have `Object.keys`!. So, Slapdash [*featurefills*][featurefills] missing native methods without touching any prototypes.
  - By not implementing the full lodash/underscore API, a lot of cruft can be removed. This includes, for example, supporting strings in place of callbacks in `map`/`each`/`filter` etc.
  - Where possible, slapdash uses browser native methods to boost performance. However, the first time it attempts to get a native method, it will make sure that it is the one it expected. If another script has tampered with the prototype (or doesn't provide one at all), we fall back to our own (small, performant) implementation.
 
-# Usage
+## Usage
 
     npm install slapdash
 
-You can then import the whole thing:
+You can then import the library like this:
 
     var _ = require('slapdash')
 
-    // or
+    // or in ES6
 
     import _ from 'slapdash'
 
-or cherrypick the methods you want:
+
+If you find yourself only using a single method, you *can* import it directly from the source. However, **I strongly recommend against this approach**, as most bundling tools (such as webpack/browserify) add additional closures around each file you import, which both add cruft and work for the browser.
 
     var map = require('slapdash/src/map')
 
     // or
 
     import map from 'slapdash/src/map'
+
+## Bundle Size
+
+| Bundle                              | Size (Kb) |
+|:------------------------------------|:----------|
+| Normal bundle                       | 6.0       |
+| Minified (`uglifyjs -c -m toplevel` | 2.9       |
+| Minified + Gzipped                  | 1.0       |
 
 ## Design Decisions
 
