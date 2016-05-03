@@ -20,7 +20,7 @@ var pkg = require(path.resolve(__dirname, '..', 'package.json'))
 var JS_SUFFIX = /\.js$/
 var REQUIRE_STMT = /^var\s+([^=\s]+)\s*=\s*require\(\'([^\']+)\'\);?/
 var INLINE_COMMENT = /^\s*\/\/.+$/
-var VAR_DECL_STMT = /(^var\s+.+)|(^function\s+)/
+var TOP_LEVEL_VAR = /(^var\s+.+)|(^function\s+)/
 var MODULE_EXPORT_STMT = /^module\.exports\s*=\s*/g
 var MODULE_EXPORT_EXTEND = /^module\.exports\./
 var SRC_DIR = path.resolve(__dirname, '..', 'src')
@@ -62,7 +62,7 @@ function parseModule (module) {
   for (var i = 0; i < nonEmptyLines.length; i++) {
     var line = nonEmptyLines[i]
     var dep = line.match(REQUIRE_STMT)
-    var def = line.match(VAR_DECL_STMT)
+    var def = line.match(TOP_LEVEL_VAR)
     var exp = line.match(MODULE_EXPORT_STMT)
     var ext = line.match(MODULE_EXPORT_EXTEND)
 
@@ -106,13 +106,13 @@ function deExportExtensions (method, methods) {
     return []
   }
   var names = methods.filter((method) => method.isCore).map((method) => method.name)
-  return [ extensions[0].replace(MODULE_EXPORT_EXTEND, `slapdash.${method.name}.`) ]
+  return [ extensions[0].replace(MODULE_EXPORT_EXTEND, `_.${method.name}.`) ]
     .concat(extensions.slice(1).map((line) => {
       var out = line
       names
         .filter((name) => name !== method.name)
         .forEach((name) => {
-          out = out.replace(new RegExp('\\b' + name + '\\b'), (x) => `slapdash.${x}`)
+          out = out.replace(new RegExp('\\b' + name + '\\b'), (x) => `_.${x}`)
         })
       return out
     }))
@@ -125,7 +125,7 @@ function remap (method, methods, exports) {
     names
       .filter((name) => name !== method.name)
       .forEach((name) => {
-        out = out.replace(new RegExp('\\b' + name + '\\b'), (x) => `slapdash.${x}`)
+        out = out.replace(new RegExp('\\b' + name + '\\b'), (x) => `_.${x}`)
       })
     return out
   })
@@ -148,11 +148,11 @@ function generateBundle () {
     .map((method) => remap(method, methodList, deExport(method.exports)))
     .concat([ `  name: '${pkg.name}'`, `  version: '${pkg.version}'` ])
     .join(',\n')
-  var slapdash = ['var slapdash = {'].concat(moduleDefs, ['}'])
+  var slapdash = ['var _ = {'].concat(moduleDefs, ['}'])
   var extensions = methodList
     .map((module) => deExportExtensions(module, methodList))
     .reduce((memo, item) => memo.concat(item), [])
-  var exports = 'module.exports = slapdash'
+  var exports = 'module.exports = _'
   return definitions.concat(helpers, slapdash, extensions, exports).join('\n')
 }
 
