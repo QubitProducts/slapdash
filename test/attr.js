@@ -1,16 +1,5 @@
 var attr = require('../src/attr')
 
-var obj = {
-  a: 'b',
-  c: {
-    d: 'e',
-    f: {
-      g: 'h',
-      i: ['j', 'k', 'l']
-    }
-  }
-}
-
 describe('attr', function () {
   var obj
 
