@@ -33,7 +33,7 @@
     "test": "npm run lint && npm run test-js",
     "test-watch": "./node_modules/.bin/karma start --watch",
     "build": "rm -rf ./dist && mkdir -p ./dist && ./scripts/build.js > ./dist/index.js",
-    "postinstall": "npm run build"
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
