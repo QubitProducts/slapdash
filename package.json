@@ -3,6 +3,9 @@
   "version": "0.6.0",
   "description": "Slapdash is a lightweight utility JavaScript utility belt, inspired heavily by lodash",
   "main": "./dist/index.js",
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "devDependencies": {
     "browserify": "^13.0.0",
     "karma": "^0.13.22",
