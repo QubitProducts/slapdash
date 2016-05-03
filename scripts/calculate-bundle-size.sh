@@ -2,42 +2,27 @@
 
 TMP=./scripts/.tmp
 BIN=./node_modules/.bin
-WEBPACK=$BIN/webpack
-BROWSERIFY=$BIN/browserify
 UGLIFY=$BIN/uglifyjs
 ENTRYPOINT=./index.js
 
 function filesize {
-  cat $1 | wc -c
-}
-
-function browserify {
-  $BROWSERIFY $ENTRYPOINT --screw-ie8 --outfile $TMP/browserify.js
-}
-
-function webpack {
-  $WEBPACK --entry $ENTRYPOINT --output-filename $TMP/webpack.js > /dev/null
+  SIZE=$(cat $1 | wc -c)
+  node -e "console.log(Math.round($SIZE*10/1024)/10)"
 }
 
 function slapdashbuild {
-  node ./scripts/build.js > $TMP/slapdashbuild.js
+  node ./scripts/build.js > $TMP/slapdash.js
 }
 
 function minify {
-  for i in {browserify,webpack,slapdashbuild}; do
-    $UGLIFY --compress warnings=false --mangle --output $TMP/$i.min.js $TMP/$i.js 2>&1 /dev/null
-  done
+  $UGLIFY --compress warnings=false --mangle --output $TMP/slapdash.min.js $TMP/slapdash.js 2>&1 /dev/null
 }
 
 function gzipped {
-  for i in {browserify,webpack,slapdashbuild}; do
-    gzip $i.min.js
-  done
+  gzip slapdash.min.js
 }
 
 function getSizes {
-  browserify
-  webpack
   slapdashbuild
   minify
 
