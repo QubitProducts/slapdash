@@ -1,10 +1,6 @@
-module.exports = function matches (match) {
+var isMatch = require('./isMatch')
+module.exports = function matches (spec) {
   return function (obj) {
-    for (var i in match) {
-      if (match.hasOwnProperty(i) && obj[i] !== match[i]) {
-        return false
-      }
-    }
-    return true
+    return isMatch(obj, spec)
   }
 }
