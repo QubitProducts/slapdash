@@ -65,17 +65,17 @@ As such:
 
 ## API Reference
 
-### `bind(method, context)`
+### `bind(method, context, arguments...)`
 
-We use this all over the place, but absolutely cannot rely on the browser's native [`Function.prototype.bind`][mdn-Function-bind] method.
+This returns a wrapper function around `method`, passing `context` as `this`, and optionally passing one or more arguments.This is a featurefill of the [`Function.prototype.bind`][mdn-Function-bind] method.
 
 ### `extend(target, ...sources)`
 
-This is a handy one that we use a lot. Where [`Object.assign`][mdn-Object-assign] is available, this will be used.
+Depending on the browser (and/or bad polyfills), this is either `Object.assign` or an equivalent featurefill.
 
 #### Notes
 
- - This will not support the optional `callback` and `context` methods from lodash.
+ - This does not support the optional `callback` and `context` methods from lodash.
 
 ### `each(array, callback, context)`
 
@@ -89,7 +89,7 @@ This is a wrapper around [`Array.prototype.forEach`][mdn-Array-forEach].
 
 ### `objectEach(object, callback, context)`
 
-This implements the object behavior of lodash's `each` method.
+Iterates over the properties of `object`, calling `callback` on each. This is similar to passing an object to lodash's `each` method.
 
 #### Notes
 
@@ -108,7 +108,7 @@ This is a wrapper around [`Array.prototype.map`][mdn-Array-map].
 
 ### `objectMap(object, callback, context)`
 
-Behaves like `map`, but operates on the values of an object. Returns a new object, with the same keys, but values updated using `callback`.
+Behaves like `map`, but operates on the values of an object. Returns a new object, with the same keys, but with the values passed through `callback`.
 
 Lodash's default behavior returns an array of mapped-over values - to get an array back from `objectMap`, use `objectMap.asArray(...)`
 
@@ -119,8 +119,7 @@ Lodash's default behavior returns an array of mapped-over values - to get an arr
 
 ### `find(array, callback, context)`
 
-Where available, this will call [`Array.prototype.find`][mdn-Array-find]. Otherwise, this provides its own
-implementation.
+Where available, this will call [`Array.prototype.find`][mdn-Array-find]. Otherwise, this provides its own implementation.
 
   - This only supports arrays, not objects. There is no `objectFind`, as it's really not that useful.
   - Callback must be a function. Objects or strings are not supported.
@@ -128,10 +127,6 @@ implementation.
 ### `pluck(array, key)`
 
 Returns a new array, containing the `key` attribute from each member of `array`.
-
-#### Notes
-
-  - Lodash actually implements this as an alias of `map`. Because I'm not a masochist, slapdash's version is as simple as possible.
 
 ### `reduce(array, callback, initialValue)`
 
@@ -169,7 +164,21 @@ Returns a new array containing the items in `array` for which `predicate` return
 
 ### `indexOf(array, item)`
 
-This is basically just a featurefill for IE8, needed for `without`.
+This is a wrapper around [`Array.prototype.indexOf`](mdn-Array-indexOf).
+
+### `isMatch(object, matchAgainst)`
+
+Returns true if and only if every property of the object `matchAgainst` exists in `object` and is strictly equivalent (`===`).
+
+### `matches(matchAgainst)`
+
+Returns a function which accepts an object as a parameter, and returns true if every property of the object `matchAgainst` exists in `object` and is strictly equivalent (`===`).
+
+This can be handy in replicating `_.findWhere`, which slapdash doesn't implement. For example:
+
+```js
+var validUsers = _.find(users, _.matches({ active: true, banned: false }))
+```
 
 [slapdash-transformers]: http://tfwiki.net/wiki/Slap_Dash
 [lodash]: http://lodash.com/
@@ -182,4 +191,5 @@ This is basically just a featurefill for IE8, needed for `without`.
 [mdn-Array-filter]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/filter
 [mdn-Array-reduce]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/reduce
 [mdn-Array-forEach]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/forEach
+[mdn-Array-indexOf]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/indexOf
 [featurefills]: https://toddmotto.com/polyfills-suck-use-a-featurefill-instead/
