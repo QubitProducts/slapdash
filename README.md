@@ -69,7 +69,7 @@ As such:
 
 This returns a wrapper function around `method`, passing `context` as `this`, and optionally passing one or more arguments.This is a featurefill of the [`Function.prototype.bind`][mdn-Function-bind] method.
 
-### `extend(target, ...sources)`
+### `assign(target, ...sources)`
 
 Depending on the browser (and/or bad polyfills), this is either `Object.assign` or an equivalent featurefill.
 

@@ -1,6 +1,6 @@
 module.exports = {
   bind: require('./src/bind'),
-  extend: require('./src/extend'),
+  assign: require('./src/assign'),
   each: require('./src/each'),
   objectEach: require('./src/objectEach'),
   map: require('./src/map'),
