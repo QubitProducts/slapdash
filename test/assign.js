@@ -1,6 +1,6 @@
-var extend = require('../src/extend')
+var assign = require('../src/assign')
 
-describe('extend', function () {
+describe('assign', function () {
   var target
   var sources = [
     { hello: 'world' },
@@ -14,19 +14,19 @@ describe('extend', function () {
   })
 
   it('should return the target object', function () {
-    expect(extend(target)).to.eql(target)
+    expect(assign(target)).to.eql(target)
   })
 
   it('should override the target object with the source object', function () {
-    expect(extend(target, sources[0])).to.eql({ hello: 'world' })
+    expect(assign(target, sources[0])).to.eql({ hello: 'world' })
   })
 
   it('should override from left to right', function () {
-    expect(extend(target, sources[0], sources[1])).to.eql({ hello: 'mother' })
+    expect(assign(target, sources[0], sources[1])).to.eql({ hello: 'mother' })
   })
 
-  it('should extend missing keys', function () {
-    expect(extend(target, sources[0], sources[1], sources[2], sources[3])).to.eql({
+  it('should assign missing keys', function () {
+    expect(assign(target, sources[0], sources[1], sources[2], sources[3])).to.eql({
       hello: 'father',
       here: 'i am',
       at: 'camp granada'
