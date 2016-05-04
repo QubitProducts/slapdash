@@ -3,7 +3,6 @@ module.exports = function isNative (method) {
   return method && typeof method === 'function' && regexpIsNative.test(toSource(method))
 }
 
-// TODO: Check if safe/featurefill
 var toString = Function.prototype.toString
 var hasOwnProperty = Object.prototype.hasOwnProperty
 

@@ -1,6 +1,6 @@
-var identity = require('../src/identity')
+var describeMethod = require('../describeMethod')
 
-describe('identity', function () {
+describeMethod('identity', function (identity) {
   it('should return what it is given', function () {
     expect(identity('hello')).to.eql('hello')
   })

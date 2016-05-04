@@ -1,8 +1,7 @@
-var filter = require('../src/filter')
+var describeMethod = require('../describeMethod')
 
-var array = [ 'hello', 'there', 'tests' ]
-
-describe('filter', function () {
+describeMethod('filter', function (filter) {
+  var array = [ 'hello', 'there', 'tests' ]
   describe('callback behaviour', function () {
     var callback, context
 

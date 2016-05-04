@@ -1,15 +1,14 @@
-var objectEach = require('../src/objectEach')
+var describeMethod = require('../describeMethod')
 
-var object = {
-  hello: 'world',
-  awesome: 'yes',
-  slap: 'dash'
-}
+describeMethod('objectEach', function (objectEach) {
+  var object = {
+    hello: 'world',
+    awesome: 'yes',
+    slap: 'dash'
+  }
 
-var keys = ['hello', 'awesome', 'slap']
-var values = ['world', 'yes', 'dash']
-
-describe('objectEach', function () {
+  var keys = ['hello', 'awesome', 'slap']
+  var values = ['world', 'yes', 'dash']
   var callback, context
 
   beforeEach(function () {

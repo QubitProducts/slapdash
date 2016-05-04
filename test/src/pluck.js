@@ -1,8 +1,7 @@
-var pluck = require('../src/pluck')
+var describeMethod = require('../describeMethod')
 
-var array = [ { b: 2, a: 1 }, { a: 2 }, { b: 3 } ]
-
-describe('pluck', function () {
+describeMethod('pluck', function (pluck) {
+  var array = [ { b: 2, a: 1 }, { a: 2 }, { b: 3 } ]
   var actual
 
   beforeEach(function () {

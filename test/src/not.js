@@ -1,6 +1,6 @@
-var not = require('../src/not')
+var describeMethod = require('../describeMethod')
 
-describe('not', function () {
+describeMethod('not', function (not) {
   var falsey = [false, 0, null, undefined, '']
   var truthy = [true, 1, {}, [], 'hello']
 

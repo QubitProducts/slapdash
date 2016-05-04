@@ -1,8 +1,7 @@
-var reduce = require('../src/reduce')
+var describeMethod = require('../describeMethod')
 
-var array = [ 1, 2, 3 ]
-
-describe('reduce', function () {
+describeMethod('reduce', function (reduce) {
+  var array = [ 1, 2, 3 ]
   var callback, actual
 
   beforeEach(function () {
