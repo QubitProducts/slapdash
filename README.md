@@ -53,11 +53,11 @@ If you find yourself only using a single method, you *can* import it directly fr
 
 ## Bundle Size
 
-| Bundle                              | Size (Kb) |
-|:------------------------------------|:----------|
-| Normal bundle                       | 6.0       |
-| Minified (`uglifyjs -c -m toplevel` | 2.9       |
-| Minified + Gzipped                  | 1.0       |
+| Bundle                               | Size (Kb) |
+|:-------------------------------------|:----------|
+| Normal bundle                        | 6.6       |
+| Minified (`uglifyjs -c -m toplevel`) | 3.1       |
+| Minified + Gzipped                   | 1.1       |
 
 ## Design Decisions
 
@@ -185,8 +185,24 @@ Returns a function which accepts an object as a parameter, and returns true if e
 This can be handy in replicating `_.findWhere`, which slapdash doesn't implement. For example:
 
 ```js
-var validUsers = _.find(users, _.matches({ active: true, banned: false }))
+var joe = _.find(users, _.matches({ id: 4567 }))
 ```
+
+### `identity(value)`
+
+Returns `value`. Useless by itself, but useful as a callback to `filter`, `find` and others.
+
+### `not(value)`
+
+Returns `true` if `value` is falsey, otherwise returns `false`. Useful as a callback to `find`.
+
+### `get(object, path)`
+
+Given a path such as `'x.y.z'`, this will return `object.x.y.z`. Array elements can also be accessed, by treating the array index like an object key, e.g. `get(object, 'a.b.c.3')`.
+
+### `set(object, path, value)`
+
+Given a path such as `'x.y.z'`, this will set `object.x.y.z = value`. Like `get`, this also supports array indices.
 
 [slapdash-transformers]: http://tfwiki.net/wiki/Slap_Dash
 [lodash]: http://lodash.com/

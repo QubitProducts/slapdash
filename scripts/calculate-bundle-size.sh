@@ -15,7 +15,7 @@ function slapdashbuild {
 }
 
 function minify {
-  $UGLIFY --compress warnings=false --mangle --output $TMP/slapdash.min.js $TMP/slapdash.js 2>&1 /dev/null
+  $UGLIFY --compress warnings=false --mangle toplevel --output $TMP/slapdash.min.js $TMP/slapdash.js 2>&1 /dev/null
 }
 
 function gzipped {
