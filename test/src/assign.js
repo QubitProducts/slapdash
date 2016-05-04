@@ -1,6 +1,6 @@
-var assign = require('../src/assign')
+var describeMethod = require('../describeMethod')
 
-describe('assign', function () {
+describeMethod('assign', function (assign) {
   var target
   var sources = [
     { hello: 'world' },

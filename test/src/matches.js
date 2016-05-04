@@ -1,8 +1,7 @@
-var matches = require('../src/matches')
+var describeMethod = require('../describeMethod')
 
-var matchAgainst = {'a': 1, 'b': 2}
-
-describe('matches', function () {
+describeMethod('matches', function (matches) {
+  var matchAgainst = {'a': 1, 'b': 2}
   var matcher
 
   afterEach(function () {

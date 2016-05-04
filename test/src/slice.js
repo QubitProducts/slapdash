@@ -1,6 +1,6 @@
-var slice = require('../src/slice')
+var describeMethod = require('../describeMethod')
 
-describe('slice', function () {
+describeMethod('slice', function (slice) {
   var baseArray = [1, 2, 3, 4, 5]
   var testCases = {
     'with no operands': {

@@ -1,6 +1,6 @@
-var set = require('../src/set')
+var describeMethod = require('../describeMethod')
 
-describe('set', function () {
+describeMethod('set', function (set) {
   var obj
 
   beforeEach(function () {

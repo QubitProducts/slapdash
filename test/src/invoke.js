@@ -1,6 +1,6 @@
-var invoke = require('../src/invoke')
+var describeMethod = require('../describeMethod')
 
-describe('invoke', function () {
+describeMethod('invoke', function (invoke) {
   var callback
 
   beforeEach(function () {

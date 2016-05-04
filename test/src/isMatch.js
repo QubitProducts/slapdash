@@ -1,8 +1,7 @@
-var isMatch = require('../src/isMatch')
+var describeMethod = require('../describeMethod')
 
-var matchAgainst = {'a': 1, 'b': 2}
-
-describe('isMatch', function () {
+describeMethod('isMatch', function (isMatch) {
+  var matchAgainst = {'a': 1, 'b': 2}
   it('should return true if every property matches', function () {
     expect(isMatch(matchAgainst, matchAgainst)).to.equal(true)
   })

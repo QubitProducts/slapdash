@@ -1,6 +1,6 @@
-var values = require('../src/values')
+var describeMethod = require('../describeMethod')
 
-describe('values', function () {
+describeMethod('values', function (values) {
   var object = { y: 'z', x: 'a', f: 'b', h: 'c' }
   var array = ['z', 'a', 'b', 'c']
 

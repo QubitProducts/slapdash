@@ -1,11 +1,10 @@
-var objectMap = require('../src/objectMap')
+var describeMethod = require('../describeMethod')
 
-var object = { a: 1, b: 2, c: 3 }
+describeMethod('objectMap', function (objectMap) {
+  var object = { a: 1, b: 2, c: 3 }
 
-var keys = ['a', 'b', 'c']
-var values = [1, 2, 3]
-
-describe('objectMap', function () {
+  var keys = ['a', 'b', 'c']
+  var values = [1, 2, 3]
   var callback, context, result
 
   beforeEach(function () {

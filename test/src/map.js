@@ -1,8 +1,7 @@
-var map = require('../src/map')
+var describeMethod = require('../describeMethod')
 
-var array = [ 1, 2, 3 ]
-
-describe('map', function () {
+describeMethod('map', function (map) {
+  var array = [ 1, 2, 3 ]
   var callback, context, actual
 
   beforeEach(function () {

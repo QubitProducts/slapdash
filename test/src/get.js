@@ -1,6 +1,6 @@
-var get = require('../src/get')
+var describeMethod = require('../describeMethod')
 
-describe('get', function () {
+describeMethod('get', function (get) {
   var obj
 
   beforeEach(function () {

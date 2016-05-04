@@ -1,6 +1,6 @@
-var find = require('../src/find')
+var describeMethod = require('../describeMethod')
 
-describe('find', function () {
+describeMethod('find', function (find) {
   var array = [1, 10, 100]
   var context = { success: true }
   var callback, result

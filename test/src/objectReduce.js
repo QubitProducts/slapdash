@@ -1,11 +1,9 @@
-var objectReduce = require('../src/objectReduce')
-var each = require('../src/each')
+var describeMethod = require('../describeMethod')
 
-var object = { a: 1, b: 2, c: 3 }
-var values = [1, 2, 3]
-var keys = ['a', 'b', 'c']
-
-describe('objectReduce', function () {
+describeMethod('objectReduce', function (objectReduce) {
+  var object = { a: 1, b: 2, c: 3 }
+  var values = [1, 2, 3]
+  var keys = ['a', 'b', 'c']
   var callback, actual
 
   beforeEach(function () {
@@ -15,15 +13,16 @@ describe('objectReduce', function () {
 
   it('should call `callback` once for each element of `object`', function () {
     expect(callback.callCount).to.equal(3)
-    each(callback.getCalls(), function (call, index, calls) {
+    var calls = callback.getCalls()
+    for (var i = 0, l = calls.length; i < l; i++) {
       sinon.assert.calledWithExactly(
-        call,
-        index > 0 ? calls[index - 1].returnValue : 0,
-        values[index],
-        keys[index],
+        calls[i],
+        i > 0 ? calls[i - 1].returnValue : 0,
+        values[i],
+        keys[i],
         object
       )
-    })
+    }
   })
 
   it('should return the reduce value', function () {

@@ -1,8 +1,7 @@
-var each = require('../src/each')
+var describeMethod = require('../describeMethod')
 
-var array = [ 'hello', 'there', 'tests' ]
-
-describe('each', function () {
+describeMethod('each', function (each) {
+  var array = [ 'hello', 'there', 'tests' ]
   var callback, context
 
   beforeEach(function () {
