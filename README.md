@@ -196,13 +196,13 @@ Returns `value`. Useless by itself, but useful as a callback to `filter`, `find`
 
 Returns `true` if `value` is falsey, otherwise returns `false`. Useful as a callback to `find`.
 
-### `attr(object, path)`
+### `get(object, path)`
 
-Given a path such as `'x.y.z'`, this will return `object.x.y.z`. Array elements can also be accessed, by treating the array index like an object key, e.g. `attr(object, 'a.b.c.3')`.
+Given a path such as `'x.y.z'`, this will return `object.x.y.z`. Array elements can also be accessed, by treating the array index like an object key, e.g. `get(object, 'a.b.c.3')`.
 
-### `attr(object, path, value)`
+### `set(object, path, value)`
 
-Given a path such as `'x.y.z'`, this will set `object.x.y.z = value`.
+Given a path such as `'x.y.z'`, this will set `object.x.y.z = value`. Like `get`, this also supports array indices.
 
 [slapdash-transformers]: http://tfwiki.net/wiki/Slap_Dash
 [lodash]: http://lodash.com/
