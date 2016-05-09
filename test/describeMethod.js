@@ -20,10 +20,12 @@ var sources = {
   objectEach: require('../src/objectEach'),
   objectMap: require('../src/objectMap'),
   objectReduce: require('../src/objectReduce'),
+  pick: require('../src/pick'),
   pluck: require('../src/pluck'),
   reduce: require('../src/reduce'),
   set: require('../src/set'),
   slice: require('../src/slice'),
+  unique: require('../src/unique'),
   values: require('../src/values')
 }
 
@@ -40,11 +42,11 @@ module.exports = function describeMethod (methodName, testSuite) {
     })
   }
 
-  describe('from source', function () {
+  describe('from source,', function () {
     runSuite(sources[methodName])
   })
 
-  describe('from bundle', function () {
+  describe('from bundle,', function () {
     runSuite(bundle[methodName])
   })
 }

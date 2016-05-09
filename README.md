@@ -204,6 +204,36 @@ Given a path such as `'x.y.z'`, this will return `object.x.y.z`. Array elements 
 
 Given a path such as `'x.y.z'`, this will set `object.x.y.z = value`. Like `get`, this also supports array indices.
 
+### `unique(array)`
+
+Returns a copy of `array`, without duplicate values (using strict equivalence, i.e. `===`).
+
+### `pick(object, keys)`
+
+Returns an object with only the keys in `keys`.
+
+## If you were looking for...
+
+### `findWhere(array, object)`
+
+You can use:
+
+```js
+_.find(array, _.matches(object))
+```
+
+### `some(array, callback, context)`
+
+```js
+_.find(_.map(array, callback, context), _.identity)
+```
+
+### `every(array, callback, context)`
+
+```js
+_.find(_.map(array, callback, context), _.not)
+```
+
 [slapdash-transformers]: http://tfwiki.net/wiki/Slap_Dash
 [lodash]: http://lodash.com/
 [codeship]: https://codeship.com/projects/144381

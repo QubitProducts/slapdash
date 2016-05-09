@@ -5,9 +5,9 @@ var names = [
   'Object.keys',
   'Object.values',
 
-  'Array.prototype.forEach',
   'Array.prototype.filter',
   'Array.prototype.find',
+  'Array.prototype.forEach',
   'Array.prototype.indexOf',
   'Array.prototype.keys',
   'Array.prototype.map',
