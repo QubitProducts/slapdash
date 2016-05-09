@@ -6,7 +6,6 @@ var sources = {
   assign: require('../src/assign'),
   bind: require('../src/bind'),
   each: require('../src/each'),
-  every: require('../src/every'),
   filter: require('../src/filter'),
   find: require('../src/find'),
   get: require('../src/get'),
@@ -26,7 +25,6 @@ var sources = {
   reduce: require('../src/reduce'),
   set: require('../src/set'),
   slice: require('../src/slice'),
-  some: require('../src/some'),
   unique: require('../src/unique'),
   values: require('../src/values')
 }

@@ -204,22 +204,6 @@ Given a path such as `'x.y.z'`, this will return `object.x.y.z`. Array elements 
 
 Given a path such as `'x.y.z'`, this will set `object.x.y.z = value`. Like `get`, this also supports array indices.
 
-### `some(array, callback, context)`
-
-Returns `true` if `callback` returns a truthy value for **any** of the items in `array`. All calls to `callback` will be bound to `context`.
-
-If the array is empty, it will return `false`.
-
-Uses [`Array.prototype.some`][mdn-Array-some] where available.
-
-### `every(array, callback, context)`
-
-Returns `true` if `callback` returns a truthy value for **all** of the items in `array`. All calls to `callback` will be bound to `context`.
-
-If the array is empty, it will return `true`.
-
-Uses [`Array.prototype.every`][mdn-Array-every] where available.
-
 ### `unique(array)`
 
 Returns a copy of `array`, without duplicate values (using strict equivalence, i.e. `===`).

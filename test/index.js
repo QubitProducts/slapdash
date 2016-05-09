@@ -1,7 +1,7 @@
 var slapdash = require('../dist')
 var pkg = require('../package.json')
 
-var methods = ['assign', 'bind', 'each', 'every', 'filter', 'find', 'get', 'identity', 'indexOf', 'invoke', 'isMatch', 'keys', 'map', 'matches', 'not', 'objectEach', 'objectMap', 'objectReduce', 'pick', 'pluck', 'reduce', 'set', 'slice', 'some', 'unique', 'values']
+var methods = ['assign', 'bind', 'each', 'filter', 'find', 'get', 'identity', 'indexOf', 'invoke', 'isMatch', 'keys', 'map', 'matches', 'not', 'objectEach', 'objectMap', 'objectReduce', 'pick', 'pluck', 'reduce', 'set', 'slice', 'unique', 'values']
 
 describe('bundle', function () {
   it('should have name and version', function () {

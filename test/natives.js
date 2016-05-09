@@ -5,7 +5,6 @@ var names = [
   'Object.keys',
   'Object.values',
 
-  'Array.prototype.every',
   'Array.prototype.filter',
   'Array.prototype.find',
   'Array.prototype.forEach',
@@ -13,8 +12,7 @@ var names = [
   'Array.prototype.keys',
   'Array.prototype.map',
   'Array.prototype.reduce',
-  'Array.prototype.slice',
-  'Array.prototype.some'
+  'Array.prototype.slice'
 ]
 
 var name
