@@ -212,6 +212,28 @@ Returns a copy of `array`, without duplicate values (using strict equivalence, i
 
 Returns an object with only the keys in `keys`.
 
+## If you were looking for...
+
+### `findWhere(array, object)`
+
+You can use:
+
+```js
+_.find(array, _.matches(object))
+```
+
+### `some(array, callback, context)`
+
+```js
+_.find(_.map(array, callback, context), _.identity)
+```
+
+### `every(array, callback, context)`
+
+```js
+_.find(_.map(array, callback, context), _.not)
+```
+
 [slapdash-transformers]: http://tfwiki.net/wiki/Slap_Dash
 [lodash]: http://lodash.com/
 [codeship]: https://codeship.com/projects/144381
@@ -224,6 +246,4 @@ Returns an object with only the keys in `keys`.
 [mdn-Array-reduce]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/reduce
 [mdn-Array-forEach]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/forEach
 [mdn-Array-indexOf]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/indexOf
-[mdn-Array-some]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/some
-[mdn-Array-every]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/every
 [featurefills]: https://toddmotto.com/polyfills-suck-use-a-featurefill-instead/
