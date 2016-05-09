@@ -204,6 +204,30 @@ Given a path such as `'x.y.z'`, this will return `object.x.y.z`. Array elements 
 
 Given a path such as `'x.y.z'`, this will set `object.x.y.z = value`. Like `get`, this also supports array indices.
 
+### `some(array, callback, context)`
+
+Returns `true` if `callback` returns a truthy value for **any** of the items in `array`. All calls to `callback` will be bound to `context`.
+
+If the array is empty, it will return `false`.
+
+Uses [`Array.prototype.some`][mdn-Array-some] where available.
+
+### `every(array, callback, context)`
+
+Returns `true` if `callback` returns a truthy value for **all** of the items in `array`. All calls to `callback` will be bound to `context`.
+
+If the array is empty, it will return `true`.
+
+Uses [`Array.prototype.every`][mdn-Array-every] where available.
+
+### `unique(array)`
+
+Returns a copy of `array`, without duplicate values (using strict equivalence, i.e. `===`).
+
+### `pick(object, keys)`
+
+Returns an object with only the keys in `keys`.
+
 [slapdash-transformers]: http://tfwiki.net/wiki/Slap_Dash
 [lodash]: http://lodash.com/
 [codeship]: https://codeship.com/projects/144381
@@ -216,4 +240,6 @@ Given a path such as `'x.y.z'`, this will set `object.x.y.z = value`. Like `get`
 [mdn-Array-reduce]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/reduce
 [mdn-Array-forEach]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/forEach
 [mdn-Array-indexOf]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/indexOf
+[mdn-Array-some]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/some
+[mdn-Array-every]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/every
 [featurefills]: https://toddmotto.com/polyfills-suck-use-a-featurefill-instead/
