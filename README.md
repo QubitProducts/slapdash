@@ -210,13 +210,13 @@ Returns a copy of `array`, without duplicate values (using strict equivalence, i
 
 ### `pick(object, keys)`
 
-Returns an object with only the keys in `keys`.
+Returns a copy of `object` with only the keys that exist in `keys`.
 
 ## If you were looking for...
 
 ### `findWhere(array, object)`
 
-You can use:
+You can use `matches` to create a callback for `find`:
 
 ```js
 _.find(array, _.matches(object))
@@ -224,14 +224,30 @@ _.find(array, _.matches(object))
 
 ### `some(array, callback, context)`
 
+You can closely replicate the behavior of `some` using `find`:
+
 ```js
-_.find(_.map(array, callback, context), _.identity)
+!!_.find(array, callback, context)
+```
+
+**N.B.** If your array contains falsey values, and your callback returns `true` for those values, `find` will return the *falsey value itself* where `some` would have returned `true`. As far as we're aware, checking for falsey values in this way is an uncommon usage pattern - if you need to do this, you can use the following workaround:
+
+```js
+!!_.find(_.map(array, callback, context), _.identity)
 ```
 
 ### `every(array, callback, context)`
 
+Again, this is just `find`, although you must change `callback` to negate its return value.
+
 ```js
-_.find(_.map(array, callback, context), _.not)
+!_.find(array, negatedCallback, context)
+```
+
+**N.B.** As with `some`, you must remember that `find` will return the value for which `callback` first returns `true`. Therefore, if you have falsey values in your array, for which your callback returns `true`, `find` will return that falsey value instead of the result of the callback, giving you a false positive for `every`. Again, this is an uncommon usage pattern - if you need this, then use the following workaround:
+
+```js
+!_.find(_.map(array, callback, context), _.not)
 ```
 
 [slapdash-transformers]: http://tfwiki.net/wiki/Slap_Dash
