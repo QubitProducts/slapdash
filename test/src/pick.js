@@ -30,8 +30,8 @@ describeMethod('pick', function (pick) {
   describe('with missing keys', function () {
     beforeEach(setupFor({ a: 1, b: 2, c: 3 }, ['d']))
 
-    it('should return `undefined` for those keys', function () {
-      expect(result).to.eql({ d: undefined })
+    it('should not include those keys in the returned object', function () {
+      expect(result).to.eql({})
     })
   })
 })

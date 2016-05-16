@@ -55,9 +55,9 @@ If you find yourself only using a single method, you *can* import it directly fr
 
 | Bundle                               | Size (Kb) |
 |:-------------------------------------|:----------|
-| Normal bundle                        | 6.6       |
-| Minified (`uglifyjs -c -m toplevel`) | 3.1       |
-| Minified + Gzipped                   | 1.1       |
+| Normal bundle                        | 6.9       |
+| Minified (`uglifyjs -c -m toplevel`) | 3.3       |
+| Minified + Gzipped                   | 1.2       |
 
 ## Design Decisions
 
