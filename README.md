@@ -75,7 +75,7 @@ As such:
 
 ### `bind(method, context, arguments...)`
 
-This returns a wrapper function around `method`, passing `context` as `this`, and optionally passing one or more arguments.This is a featurefill of the [`Function.prototype.bind`][mdn-Function-bind] method.
+This returns a wrapper function around `method`, passing `context` as `this`, and optionally passing one or more arguments. This is a featurefill of the [`Function.prototype.bind`][mdn-Function-bind] method.
 
 ### `assign(target, ...sources)`
 
@@ -84,6 +84,18 @@ Depending on the browser (and/or bad polyfills), this is either `Object.assign` 
 #### Notes
 
  - This does not support the optional `callback` and `context` methods from lodash.
+
+### `keys(object)`
+
+Returns the own property keys of `object`. This is a featurefill around [`Object.keys`][mdn-Object-keys].
+
+### `values(object)`
+
+Returns the own property values of `object`. This is a featurefill around [`Object.values`][mdn-Object-values].
+
+### `slice(array, start, end)`
+
+Returns a subset of `array`, from the index `start` to the index `end`. Negative values are supported for `start`/`end`. This is a featurefill around [`Array.prototype.slice`][mdn-Array-slice].
 
 ### `each(array, callback, context)`
 
@@ -255,6 +267,8 @@ Again, this is just `find`, although you must change `callback` to negate its re
 [codeship]: https://codeship.com/projects/144381
 [es5]: http://caniuse.com/#search=es5
 [mdn-Object-assign]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Object/assign
+[mdn-Object-keys]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Object/keys
+[mdn-Object-values]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Object/values
 [mdn-Function-bind]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind
 [mdn-Array-map]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/map
 [mdn-Array-find]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/find
@@ -262,4 +276,5 @@ Again, this is just `find`, although you must change `callback` to negate its re
 [mdn-Array-reduce]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/reduce
 [mdn-Array-forEach]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/forEach
 [mdn-Array-indexOf]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/indexOf
+[mdn-Array-slice]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/slice
 [featurefills]: https://toddmotto.com/polyfills-suck-use-a-featurefill-instead/
