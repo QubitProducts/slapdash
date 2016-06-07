@@ -9,11 +9,7 @@ module.exports = function some (coll, pred, context) {
     return false
   }
 
-  if (!pred) {
-    pred = identity
-  } else {
-    pred = bind(pred, context)
-  }
+  pred = pred ? bind(pred, context) : identity
 
   if (isNative(nativeSome)) {
     return nativeSome.call(coll, pred)
