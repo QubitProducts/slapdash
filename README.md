@@ -236,7 +236,7 @@ _.find(array, _.matches(object))
 
 ### `some(array, callback, context)`
 
-Check if some of the items in the array match the predicate. If you do not provide a callback then `_.identity` will be used.
+Check if some of the items in the array match the predicate, you need to pass a predicate function and an optional context.
 
 ```js
 _.some([1, 2, 3], _.identity) // true
