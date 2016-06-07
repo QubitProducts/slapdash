@@ -239,9 +239,9 @@ _.find(array, _.matches(object))
 Check if some of the items in the array match the predicate. If you do not provide a callback then `_.identity` will be used.
 
 ```js
-_.some([1, 2, 3]) // true
-_.some([false, true, false]) // true
-_.some([false, false, false]) // false
+_.some([1, 2, 3], _.identity) // true
+_.some([false, true, false], _.identity) // true
+_.some([false, false, false], _.identity) // false
 _.some([-1, 0, 1], isPositive) // true
 ```
 

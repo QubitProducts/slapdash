@@ -1,4 +1,5 @@
 var describeMethod = require('../describeMethod')
+var identity = require('../../src/identity')
 
 function isPositive (n) {
   return n > 0
@@ -30,33 +31,21 @@ describeMethod('some', function (some) {
     expect(some([], isPositive)).to.be(false)
   })
 
-  it('should not throw when given bad arguments', function () {
-    expect(some).to.not.throwException()
-    expect(some).withArgs(null).to.not.throwException()
-    expect(some).withArgs([]).to.not.throwException()
+  it('should throw when given bad arguments', function () {
+    expect(some).to.throwException()
+    expect(some).withArgs(null).to.throwException()
+    expect(some).withArgs([]).to.throwException()
     expect(some).withArgs([], isPositive).to.not.throwException()
   })
 
-  it('should return false if given nothing', function () {
-    expect(some([])).to.be(false)
-  })
-
-  it('should return false for undefined / null input', function () {
-    expect(some()).to.be(false)
-  })
-
   it('should return false for non-matches', function () {
-    expect(some([false, 0, ''])).to.be(false)
+    expect(some([false, 0, ''], identity)).to.be(false)
     expect(some([false, 0, ''], is(1))).to.be(false)
   })
 
   it('should return true for matches', function () {
-    expect(some([false, 1, ''])).to.be(true)
+    expect(some([false, 1, ''], identity)).to.be(true)
     expect(some([false, 1, ''], is(1))).to.be(true)
-  })
-
-  it('should return true when all match', function () {
-    expect(some([1, 2, 3])).to.be(true)
   })
 
   it('applies context correctly', function () {
