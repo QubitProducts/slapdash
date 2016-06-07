@@ -26,7 +26,8 @@ var sources = {
   set: require('../src/set'),
   slice: require('../src/slice'),
   unique: require('../src/unique'),
-  values: require('../src/values')
+  values: require('../src/values'),
+  some: require('../src/some')
 }
 
 module.exports = function describeMethod (methodName, testSuite) {
