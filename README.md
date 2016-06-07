@@ -236,21 +236,18 @@ _.find(array, _.matches(object))
 
 ### `some(array, callback, context)`
 
-You can closely replicate the behavior of `some` using `find`:
+Check if some of the items in the array match the predicate. If you do not provide a callback then `_.identity` will be used.
 
 ```js
-!!_.find(array, callback, context)
-```
-
-**N.B.** If your array contains falsey values, and your callback returns `true` for those values, `find` will return the *falsey value itself* where `some` would have returned `true`. As far as we're aware, checking for falsey values in this way is an uncommon usage pattern - if you need to do this, you can use the following workaround:
-
-```js
-!!_.find(_.map(array, callback, context), _.identity)
+_.some([1, 2, 3]) // true
+_.some([false, true, false]) // true
+_.some([false, false, false]) // false
+_.some([-1, 0, 1], isPositive) // true
 ```
 
 ### `every(array, callback, context)`
 
-Again, this is just `find`, although you must change `callback` to negate its return value.
+This is just `find`, although you must change `callback` to negate its return value.
 
 ```js
 !_.find(array, negatedCallback, context)
