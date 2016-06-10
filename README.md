@@ -55,9 +55,9 @@ If you find yourself only using a single method, you *can* import it directly fr
 
 | Bundle                               | Size (Kb) |
 |:-------------------------------------|:----------|
-| Normal bundle                        | 6.9       |
-| Minified (`uglifyjs -c -m toplevel`) | 3.3       |
-| Minified + Gzipped                   | 1.2       |
+| Normal bundle                        | 7.8       |
+| Minified (`uglifyjs -c -m toplevel`) | 3.7       |
+| Minified + Gzipped                   | 1.3       |
 
 ## Design Decisions
 
@@ -224,19 +224,11 @@ Returns a copy of `array`, without duplicate values (using strict equivalence, i
 
 Returns a copy of `object` with only the keys that exist in `keys`.
 
-## If you were looking for...
-
-### `findWhere(array, object)`
-
-You can use `matches` to create a callback for `find`:
-
-```js
-_.find(array, _.matches(object))
-```
-
 ### `some(array, callback, context)`
 
 Check if some of the items in the array match the predicate, you need to pass a predicate function and an optional context.
+
+This is essentially a featurefill of [`Array.prototype.some`][mdn-Array-some].
 
 ```js
 _.some([1, 2, 3], _.identity) // true
@@ -247,16 +239,18 @@ _.some([-1, 0, 1], isPositive) // true
 
 ### `every(array, callback, context)`
 
-This is just `find`, although you must change `callback` to negate its return value.
+Check if all of the items in the array match the predicate, you need to pass a predicate function and an optional context.
+
+This is essentially a featurefill of [`Array.prototype.every`][mdn-Array-every].
+
+## If you were looking for...
+
+### `findWhere(array, object)`
+
+You can use `matches` to create a callback for `find`:
 
 ```js
-!_.find(array, negatedCallback, context)
-```
-
-**N.B.** As with `some`, you must remember that `find` will return the value for which `callback` first returns `true`. Therefore, if you have falsey values in your array, for which your callback returns `true`, `find` will return that falsey value instead of the result of the callback, giving you a false positive for `every`. Again, this is an uncommon usage pattern - if you need this, then use the following workaround:
-
-```js
-!_.find(_.map(array, callback, context), _.not)
+_.find(array, _.matches(object))
 ```
 
 [slapdash-transformers]: http://tfwiki.net/wiki/Slap_Dash
@@ -274,4 +268,6 @@ This is just `find`, although you must change `callback` to negate its return va
 [mdn-Array-forEach]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/forEach
 [mdn-Array-indexOf]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/indexOf
 [mdn-Array-slice]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/slice
+[mdn-Array-every]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/every
+[mdn-Array-some]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/some
 [featurefills]: https://toddmotto.com/polyfills-suck-use-a-featurefill-instead/
