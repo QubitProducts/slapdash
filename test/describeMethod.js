@@ -6,6 +6,7 @@ var sources = {
   assign: require('../src/assign'),
   bind: require('../src/bind'),
   each: require('../src/each'),
+  every: require('../src/every'),
   filter: require('../src/filter'),
   find: require('../src/find'),
   get: require('../src/get'),
