@@ -1,17 +1,17 @@
 var describeMethod = require('../describeMethod')
 
 describeMethod('isObject', function (isObject) {
-  it('should return true if object matches', function () {
+  it('should return true if argument is an object', function () {
     var obj = {'a': 1, 'b': 2}
     expect(isObject(obj)).to.equal(true)
   })
 
-  it('should return true if object is an array', function () {
+  it('should return true if argument is an array', function () {
     var obj = ['obj']
     expect(isObject(obj)).to.equal(true)
   })
 
-  it('should return false if object is a string', function () {
+  it('should return false if argument is a string', function () {
     var obj = 'obj'
     expect(isObject(obj)).to.equal(false)
   })
