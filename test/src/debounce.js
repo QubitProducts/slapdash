@@ -10,4 +10,11 @@ describeMethod('debounce', function (debounce) {
       done()
     }, 1)
   })
+
+  it('can call immediately', function () {
+    var todb = sinon.spy()
+    var db = debounce(todb, 1, true)
+    db()
+    sinon.assert.called(todb)
+  })
 })
