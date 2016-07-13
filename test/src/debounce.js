@@ -25,4 +25,19 @@ describeMethod('debounce', function (debounce) {
     db()
     sinon.assert.calledOnce(todb)
   })
+
+  it('will resume calls once window is over', function (done) {
+    var todb = sinon.spy()
+    var time = 2
+    var db = debounce(todb, time, true)
+    db()
+    db()
+    setTimeout(function () {
+      db()
+      setTimeout(function () {
+        sinon.assert.calledTwice(todb)
+        done()
+      }, time)
+    }, time)
+  })
 })
