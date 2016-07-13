@@ -17,4 +17,12 @@ describeMethod('debounce', function (debounce) {
     db()
     sinon.assert.called(todb)
   })
+
+  it('will only call once within a window', function () {
+    var todb = sinon.spy()
+    var db = debounce(todb, 10, true)
+    db()
+    db()
+    sinon.assert.calledOnce(todb)
+  })
 })
