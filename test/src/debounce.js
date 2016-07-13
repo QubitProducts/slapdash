@@ -40,4 +40,20 @@ describeMethod('debounce', function (debounce) {
       }, time)
     }, time)
   })
+
+  it('will preserve context', function (done) {
+    var result = null
+    var todb = function () {
+      result = this
+    }
+    var db = debounce(todb, 1)
+    var context = {
+      db: db
+    }
+    context.db()
+    setTimeout(function () {
+      expect(result).to.equal(context)
+      done()
+    }, 1)
+  })
 })
