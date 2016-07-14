@@ -243,6 +243,22 @@ Check if all of the items in the array match the predicate, you need to pass a p
 
 This is essentially a featurefill of [`Array.prototype.every`][mdn-Array-every].
 
+### `isObject(value)`
+
+Returns true if `value` is an object or a function, and not `null`.
+
+### `isArray(value)`
+
+Returns true if `value` is an array. Does not return true for array-like objects (i.e. `arguments` et. al.).
+
+This is essentially a featurefill of [`Array.isArray`][mdn-Array-isArray].
+
+### `debounce(func, wait, immediate)`
+
+Returns a [debounced][debounce] version of `func`, which, regardless of how many times it is called, will only actually call `func` at most once every `wait` milliseconds.
+
+If `immediate` is truthy, then `func` will be called immediately on the first call - otherwise it will be delayed by `wait` milliseconds.
+
 ## If you were looking for...
 
 ### `findWhere(array, object)`
@@ -270,4 +286,6 @@ _.find(array, _.matches(object))
 [mdn-Array-slice]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/slice
 [mdn-Array-every]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/every
 [mdn-Array-some]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/some
+[mdn-Array-isArray]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Array/isArray
 [featurefills]: https://toddmotto.com/polyfills-suck-use-a-featurefill-instead/
+[debounce]: https://css-tricks.com/debouncing-throttling-explained-examples/
