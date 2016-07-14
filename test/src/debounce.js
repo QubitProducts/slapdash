@@ -56,4 +56,14 @@ describeMethod('debounce', function (debounce) {
       done()
     }, 1)
   })
+
+  it('will preserve arguments', function (done) {
+    var todb = sinon.spy()
+    var db = debounce(todb, 1)
+    db('fred')
+    setTimeout(function () {
+      expect(todb.withArgs('fred').calledOnce).to.equal(true)
+      done()
+    }, 1)
+  })
 })
