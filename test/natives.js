@@ -12,7 +12,8 @@ var names = [
   'Array.prototype.keys',
   'Array.prototype.map',
   'Array.prototype.reduce',
-  'Array.prototype.slice'
+  'Array.prototype.slice',
+  'Array.isArray'
 ]
 
 var name
