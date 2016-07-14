@@ -5,6 +5,7 @@ var bundle = require('../dist')
 var sources = {
   assign: require('../src/assign'),
   bind: require('../src/bind'),
+  debounce: require('../src/debounce'),
   each: require('../src/each'),
   every: require('../src/every'),
   filter: require('../src/filter'),
@@ -13,6 +14,8 @@ var sources = {
   identity: require('../src/identity'),
   indexOf: require('../src/indexOf'),
   invoke: require('../src/invoke'),
+  isArray: require('../src/isArray'),
+  isObject: require('../src/isObject'),
   isMatch: require('../src/isMatch'),
   keys: require('../src/keys'),
   map: require('../src/map'),
