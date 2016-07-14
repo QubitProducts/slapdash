@@ -6,6 +6,10 @@ describeMethod('isArray', function (isArray) {
     expect(isArray(obj)).to.equal(true)
   })
 
+  it('should return false if argument is an arguments object', function () {
+    expect(isArray(arguments)).to.equal(false)
+  })
+
   it('should return false if argument is an object', function () {
     var obj = {'a': 1, 'b': 2}
     expect(isArray(obj)).to.equal(false)
