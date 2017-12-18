@@ -56,6 +56,38 @@ describeMethod('set', function (set) {
         expect(obj.c.f.i[2]).to.eql('o')
       })
     })
+
+    it('should work with arrays treated as objects', function () {
+      var expected = []
+      expected.c = {
+        f: {
+          i: {
+            2: 'o'
+          }
+        }
+      }
+      expect(set([], 'c.f.i.2', 'o')).to.eql(expected)
+    })
+
+    describe('where object is a primitive', function () {
+      it('should return object', function () {
+        expect(set(null, 'c.f.i.2', 'o')).to.eql(null)
+        expect(set(true, 'c.f.i.2', 'o')).to.eql(true)
+        expect(set(5, 'c.f.i.2', 'o')).to.eql(5)
+      })
+    })
+
+    describe('where intemediary path is a primitive', function () {
+      it('should return object', function () {
+        expect(set({ a: 1 }, 'a.b.c', 1)).to.eql({
+          a: {
+            b: {
+              c: 1
+            }
+          }
+        })
+      })
+    })
   })
 
   describe('on an array', function () {
@@ -102,7 +134,7 @@ describeMethod('set', function (set) {
     })
 
     it('should set a nested key', function () {
-      set(obj, 'd.f.i.1', 'c')
+      var x = set(obj, 'd.f.i.1', 'c')
       expect(obj.d.f.i[1]).to.eql('c')
     })
   })

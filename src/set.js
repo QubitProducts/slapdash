@@ -1,4 +1,7 @@
 module.exports = function set (object, path, val) {
+  if (!object) return object
+  if (typeof object !== 'object' && typeof object !== 'function') return object
+
   var parts = path.split('.')
   var context = object
   var nextKey
@@ -12,4 +15,6 @@ module.exports = function set (object, path, val) {
       context[nextKey] = val
     }
   } while (parts.length)
+
+  return object
 }
