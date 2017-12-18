@@ -9,7 +9,7 @@ module.exports = function (config) {
     sl_ie_8: {
       base: 'SauceLabs',
       browserName: 'internet explorer',
-      platform: 'Windows XP',
+      platform: 'Windows 7',
       version: '8'
     },
     sl_ie_9: {
@@ -50,6 +50,15 @@ module.exports = function (config) {
       quiet: true,
       noInfo: true
     },
+
+    mocha: {
+      timeout: 20000
+    },
+
+    browserDisconnectTimeout: 10000,
+    browserDisconnectTolerance: 1,
+    browserNoActivityTimeout: 4 * 60 * 1000,
+    captureTimeout: 4 * 60 * 1000,
 
     customLaunchers: customLaunchers,
     browsers: [
