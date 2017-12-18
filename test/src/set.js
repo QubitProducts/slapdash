@@ -35,6 +35,27 @@ describeMethod('set', function (set) {
       set(obj, 'c.f.i.2', 'o')
       expect(obj.c.f.i[2]).to.eql('o')
     })
+
+    describe('where path does not exist', function () {
+      beforeEach(function () {
+        obj = {}
+      })
+
+      it('should set a single key', function () {
+        set(obj, 'a', 'm')
+        expect(obj.a).to.eql('m')
+      })
+
+      it('should set a nested key', function () {
+        set(obj, 'c.f.g', 'n')
+        expect(obj.c.f.g).to.eql('n')
+      })
+
+      it('should set a numeric key', function () {
+        set(obj, 'c.f.i.2', 'o')
+        expect(obj.c.f.i[2]).to.eql('o')
+      })
+    })
   })
 
   describe('on an array', function () {

@@ -1,8 +1,15 @@
-var reduce = require('./reduce')
-
 module.exports = function set (object, path, val) {
-  return reduce(path.split('.'), function (memo, next, i, parts) {
-    if (typeof memo === 'undefined' || memo === null) return
-    return (i === parts.length - 1) ? (memo[next] = val) : memo[next]
-  }, object)
+  var parts = path.split('.')
+  var context = object
+  var nextKey
+
+  do {
+    nextKey = parts.shift()
+    if (typeof context[nextKey] !== 'object') context[nextKey] = {}
+    if (parts.length) {
+      context = context[nextKey]
+    } else {
+      context[nextKey] = val
+    }
+  } while (parts.length)
 }
