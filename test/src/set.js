@@ -72,6 +72,7 @@ describeMethod('set', function (set) {
     describe('where object is a primitive', function () {
       it('should return object', function () {
         expect(set(null, 'c.f.i.2', 'o')).to.eql(null)
+        expect(set(undefined, 'c.f.i.2', 'o')).to.eql(undefined)
         expect(set(true, 'c.f.i.2', 'o')).to.eql(true)
         expect(set(5, 'c.f.i.2', 'o')).to.eql(5)
       })
@@ -134,7 +135,7 @@ describeMethod('set', function (set) {
     })
 
     it('should set a nested key', function () {
-      var x = set(obj, 'd.f.i.1', 'c')
+      set(obj, 'd.f.i.1', 'c')
       expect(obj.d.f.i[1]).to.eql('c')
     })
   })
