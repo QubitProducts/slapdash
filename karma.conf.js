@@ -6,12 +6,6 @@ module.exports = function (config) {
       platform: 'OS X 10.9',
       version: '7.1'
     },
-    sl_ie_8: {
-      base: 'SauceLabs',
-      browserName: 'internet explorer',
-      platform: 'Windows XP',
-      version: '8'
-    },
     sl_ie_9: {
       base: 'SauceLabs',
       browserName: 'internet explorer',
@@ -50,6 +44,15 @@ module.exports = function (config) {
       quiet: true,
       noInfo: true
     },
+
+    mocha: {
+      timeout: 20000
+    },
+
+    browserDisconnectTimeout: 10000,
+    browserDisconnectTolerance: 1,
+    browserNoActivityTimeout: 4 * 60 * 1000,
+    captureTimeout: 4 * 60 * 1000,
 
     customLaunchers: customLaunchers,
     browsers: [

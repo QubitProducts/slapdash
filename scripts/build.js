@@ -15,23 +15,19 @@
 
 var fs = require('fs')
 var path = require('path')
-var pkg = require(path.resolve(__dirname, '..', 'package.json'))
+var constants = require('./constants')
 
-var JS_SUFFIX = /\.js$/
-var REQUIRE_STMT = /^var\s+([^=\s]+)\s*=\s*require\(\'([^\']+)\'\);?/
-var INLINE_COMMENT = /^\s*\/\/.+$/
-var TOP_LEVEL_VAR = /(^var\s+.+)|(^function\s+)/
-var MODULE_EXPORT_STMT = /^module\.exports\s*=\s*/g
-var MODULE_EXPORT_EXTEND = /^module\.exports\./
-var SRC_DIR = path.resolve(__dirname, '..', 'src')
+var pkg = require(constants.PKG_PATH)
+pkg.main = './dist/index.js'
+fs.writeFile(constants.PKG_PATH, JSON.stringify(pkg, null, 2))
 
 function getMethods () {
   var obj = {}
-  fs.readdirSync(path.join(SRC_DIR, 'util'))
+  fs.readdirSync(path.join(constants.SRC_DIR, 'util'))
     .map((x) => `util/${x}`)
-    .concat(fs.readdirSync(SRC_DIR))
-    .filter((fName) => fName.match(JS_SUFFIX))
-    .map((fName) => fName.replace(JS_SUFFIX, ''))
+    .concat(fs.readdirSync(constants.SRC_DIR))
+    .filter((fName) => fName.match(constants.JS_SUFFIX) && !fName.includes('index.js'))
+    .map((fName) => fName.replace(constants.JS_SUFFIX, ''))
     .map((name) => ({
       name: name.replace(/^[^\/]+\//, ''),
       path: name + '.js',
@@ -45,7 +41,7 @@ function getMethods () {
 }
 
 function getModuleSourceByName (name) {
-  return fs.readFileSync(path.join(SRC_DIR, name), 'utf8')
+  return fs.readFileSync(path.join(constants.SRC_DIR, name), 'utf8')
 }
 
 function parseModule (module) {
@@ -57,14 +53,14 @@ function parseModule (module) {
     ext: []
   }
 
-  var nonEmptyLines = module.src.filter((line) => line && !line.match(INLINE_COMMENT))
+  var nonEmptyLines = module.src.filter((line) => line && !line.match(constants.INLINE_COMMENT))
   var last
   for (var i = 0; i < nonEmptyLines.length; i++) {
     var line = nonEmptyLines[i]
-    var dep = line.match(REQUIRE_STMT)
-    var def = line.match(TOP_LEVEL_VAR)
-    var exp = line.match(MODULE_EXPORT_STMT)
-    var ext = line.match(MODULE_EXPORT_EXTEND)
+    var dep = line.match(constants.REQUIRE_STMT)
+    var def = line.match(constants.TOP_LEVEL_VAR)
+    var exp = line.match(constants.MODULE_EXPORT_STMT)
+    var ext = line.match(constants.MODULE_EXPORT_EXTEND)
 
     if (dep) {
       last = 'dep'
@@ -96,7 +92,7 @@ function deExport (exports) {
   if (!exports.length) {
     return []
   }
-  return [ exports[0].replace(MODULE_EXPORT_STMT, '') ]
+  return [ exports[0].replace(constants.MODULE_EXPORT_STMT, '') ]
     .concat(exports.slice(1))
 }
 
@@ -106,7 +102,7 @@ function deExportExtensions (method, methods) {
     return []
   }
   var names = methods.filter((method) => method.isCore).map((method) => method.name)
-  return [ extensions[0].replace(MODULE_EXPORT_EXTEND, `_.${method.name}.`) ]
+  return [ extensions[0].replace(constants.MODULE_EXPORT_EXTEND, `_.${method.name}.`) ]
     .concat(extensions.slice(1).map((line) => {
       var out = line
       names
