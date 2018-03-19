@@ -1,23 +1,33 @@
 var isNative = require('./util/isNative')
 var slice = Array.prototype.slice
+
 var slicer = isNative(slice)
   ? function nativeSlice (array, begin, end) {
     return slice.call(array, begin, end)
   }
-  : function slice (array, start, end) {
-    var l = array.length
+  : function slice(array, start, end) {
+    // Copied almost exactly from https://github.com/lodash/lodash/blob/master/slice.js
+    var length = array == null ? 0 : array.length
+    if (!length) {
+      return []
+    }
 
-    // Handle negative values for `begin`
-    if (start < 0) start = Math.max(0, l + start)
+    if (start < 0) {
+      start = -start > length ? 0 : (length + start)
+    }
+    end = end > length ? length : end
+    if (end < 0) {
+      end += length
+    }
+    length = start > end ? 0 : ((end - start) >>> 0)
+    start >>>= 0
 
-    // Handle negative values for `end`
-    var size = (end < 0 ? l + end : Math.min(end, l)) - start
-
-    if (size <= 1) return []
-
-    var sliced = new Array(size)
-    for (var i = size; i > start; i--) sliced[i] = array[i]
-    return sliced
+    var index = -1
+    var result = new Array(length)
+    while (++index < length) {
+      result[index] = array[index + start]
+    }
+    return result
   }
 
 module.exports = function slice (array, begin, end) {
