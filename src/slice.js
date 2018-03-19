@@ -13,10 +13,10 @@ var slicer = isNative(slice)
     // Handle negative values for `end`
     var size = (end < 0 ? l + end : Math.min(end, l)) - start
 
-    if (size <= 1) return []
+    if (size < 1) return []
 
     var sliced = new Array(size)
-    for (var i = size; i > start; i--) sliced[i] = array[i]
+    for (var i = size - 1; i >= start; i--) sliced[i] = array[i]
     return sliced
   }
 
