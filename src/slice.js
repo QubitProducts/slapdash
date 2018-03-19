@@ -5,7 +5,7 @@ var slicer = isNative(slice)
   ? function nativeSlice (array, begin, end) {
     return slice.call(array, begin, end)
   }
-  : function slice(array, start, end) {
+  : function slice (array, start, end) {
     // Copied almost exactly from https://github.com/lodash/lodash/blob/master/slice.js
     var length = array == null ? 0 : array.length
     if (!length) {
