@@ -14,7 +14,8 @@
     "karma-expect": "^1.1.2",
     "karma-firefox-launcher": "^0.1.7",
     "karma-mocha": "^0.2.2",
-    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-phantomjs-launcher": "^1.0.4",
     "karma-sauce-launcher": "^0.3.1",
     "karma-sinon-ie": "^2.0.0-rc10",
     "karma-sourcemap-loader": "^0.3.7",
@@ -26,11 +27,13 @@
     "watchify": "^3.7.0"
   },
   "scripts": {
-    "lint": "./node_modules/.bin/standard ./src",
-    "test-js": "./node_modules/.bin/karma start --single-run",
-    "test-saucelabs": "./node_modules/.bin/karma start --single-run --browsers=sl_ie_8,sl_ie_9,sl_ie_10 --reporters dots,saucelabs",
-    "test": "npm run lint && npm run test-js",
-    "test-watch": "./node_modules/.bin/karma start --watch",
+    "lint": "standard ./src",
+    "test": "npm run lint && npm run test-main && npm run test-native && npm run test-poly",
+    "test-main": "SLAPDASH_FILES=test/index.js karma start --single-run",
+    "test-native": "SLAPDASH_FILES=test/native.js karma start --single-run",
+    "test-poly": "SLAPDASH_FILES=test/poly.js karma start --single-run",
+    "test-saucelabs": "SAUCY=true npm run test-main && SAUCY=true npm run test-poly",
+    "test-watch": "SLAPDASH_FILES=test/poly karma start --watch",
     "build": "rm -rf ./dist && mkdir -p ./dist && ./scripts/build.js > ./dist/index.js && ./scripts/create-index.js > ./src/index.js",
     "prepublish": "npm run build",
     "postpublish": "./scripts/unbuild.js"
@@ -56,5 +59,6 @@
       "expect",
       "sinon"
     ]
-  }
+  },
+  "dependencies": {}
 }

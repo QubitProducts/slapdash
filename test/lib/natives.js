@@ -1,10 +1,8 @@
 var glbl = Function('return this')() // eslint-disable-line no-new-func
 var nativesCache = {}
 var names = [
-  'Object.assign',
-  'Object.keys',
-  'Object.values',
-
+  'Array.isArray',
+  'Array.prototype.every',
   'Array.prototype.filter',
   'Array.prototype.find',
   'Array.prototype.forEach',
@@ -13,7 +11,10 @@ var names = [
   'Array.prototype.map',
   'Array.prototype.reduce',
   'Array.prototype.slice',
-  'Array.isArray'
+  'Array.prototype.some',
+  'Object.assign',
+  'Object.keys',
+  'Object.values'
 ]
 
 var name
@@ -49,7 +50,7 @@ function setNative (name, method) {
   for (i = 0; i < length - 1; i++) {
     cursor = cursor[parts[i]]
   }
-  cursor[parts[length]] = method
+  cursor[parts[length - 1]] = method
 }
 
 function overrideNatives () {
