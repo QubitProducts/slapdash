@@ -23,26 +23,10 @@ module.exports = function (config) {
   config.set({
     frameworks: ['browserify', 'mocha', 'expect', 'sinon'],
 
-    files: ['test/**/*.js'],
+    files: [ process.env.SLAPDASH_FILES ],
 
-    // add webpack as preprocessor
     preprocessors: {
       'test/**/*.js': ['browserify', 'sourcemap']
-    },
-
-    webpack: {
-      // karma watches test/test_index.js
-      // webpack watches dependencies of test/test_index.js
-      watch: true,
-      devtool: 'inline-source-map',
-      resolve: {
-        extensions: ['', '.js']
-      }
-    },
-
-    webpackServer: {
-      quiet: true,
-      noInfo: true
     },
 
     mocha: {
@@ -55,10 +39,17 @@ module.exports = function (config) {
     captureTimeout: 4 * 60 * 1000,
 
     customLaunchers: customLaunchers,
-    browsers: [
-      'Chrome',
-      'Firefox',
-      'PhantomJS'
-    ]
+
+    browserify: {
+      debug: true
+    },
+
+    browsers: process.env.SAUCY
+      ? ['sl_ie_8', 'sl_ie_9', 'sl_ie_10']
+      : ['Chrome'],
+
+    reporters: process.env.SAUCY
+      ? ['dots', 'saucelabs']
+      : ['mocha']
   })
 }
