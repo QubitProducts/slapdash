@@ -19,7 +19,7 @@ var constants = require('./constants')
 
 var pkg = require(constants.PKG_PATH)
 pkg.main = './dist/index.js'
-fs.writeFile(constants.PKG_PATH, JSON.stringify(pkg, null, 2), function () {})
+fs.writeFile(constants.PKG_PATH, JSON.stringify(pkg, null, 2))
 
 function getMethods () {
   var obj = {}
