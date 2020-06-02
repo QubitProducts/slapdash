@@ -3,6 +3,7 @@ var isNative = require('../src/util/isNative')
 var assign
 var bind
 var debounce
+var throttle
 var each
 var every
 var filter
@@ -36,6 +37,7 @@ describe('polyfill', function () {
     assign = require('../src/assign')
     bind = require('../src/bind')
     debounce = require('../src/debounce')
+    throttle = require('../src/throttle')
     each = require('../src/each')
     every = require('../src/every')
     filter = require('../src/filter')
@@ -67,6 +69,7 @@ describe('polyfill', function () {
     if (isNative(assign)) throw new Error('native assign loaded where polyfill was expected')
     if (isNative(bind)) throw new Error('native bind loaded where polyfill was expected')
     if (isNative(debounce)) throw new Error('native debounce loaded where polyfill was expected')
+    if (isNative(throttle)) throw new Error('native throttle loaded where polyfill was expected')
     if (isNative(each)) throw new Error('native each loaded where polyfill was expected')
     if (isNative(every)) throw new Error('native every loaded where polyfill was expected')
     if (isNative(filter)) throw new Error('native filter loaded where polyfill was expected')
@@ -96,7 +99,10 @@ describe('polyfill', function () {
 
     require('./src/assign')(assign)
     require('./src/bind')(bind)
+    console.log({}.toString.call(require('./src/debounce') === '[object Function]'))
     require('./src/debounce')(debounce)
+    console.log({}.toString.call(require('./src/throttle') === '[object Function]'))
+    require('./src/throttle')(throttle)
     require('./src/each')(each)
     require('./src/every')(every)
     require('./src/filter')(filter)
@@ -130,6 +136,7 @@ describe('polyfill', function () {
     assign = require('../dist').assign
     bind = require('../dist').bind
     debounce = require('../dist').debounce
+    throttle = require('../dist').throttle
     each = require('../dist').each
     every = require('../dist').every
     filter = require('../dist').filter
@@ -161,6 +168,7 @@ describe('polyfill', function () {
     if (isNative(assign)) throw new Error('native assign loaded where polyfill was expected')
     if (isNative(bind)) throw new Error('native bind loaded where polyfill was expected')
     if (isNative(debounce)) throw new Error('native debounce loaded where polyfill was expected')
+    if (isNative(throttle)) throw new Error('native throttle loaded where polyfill was expected')
     if (isNative(each)) throw new Error('native each loaded where polyfill was expected')
     if (isNative(every)) throw new Error('native every loaded where polyfill was expected')
     if (isNative(filter)) throw new Error('native filter loaded where polyfill was expected')
@@ -191,6 +199,7 @@ describe('polyfill', function () {
     require('./src/assign')(assign)
     require('./src/bind')(bind)
     require('./src/debounce')(debounce)
+    require('./src/throttle')(throttle)
     require('./src/each')(each)
     require('./src/every')(every)
     require('./src/filter')(filter)
