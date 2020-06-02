@@ -12,7 +12,8 @@ module.exports = function (throttle) {
 
     it('will only call once within a window', function () {
       var tothr = sinon.spy()
-      var thr = throttle(tothr, 90, true)
+      var thr = throttle(tothr, 90)
+      thr()
       setTimeout(function () {
         thr()
       }, 30)
@@ -21,14 +22,14 @@ module.exports = function (throttle) {
       }, 60)
       setTimeout(function () {
         thr()
-        sinon.assert.calledOnce(tothr)
+        sinon.assert.calledTwice(tothr)
       }, 150)
     })
 
     it('will resume calls once window is over', function (done) {
       var tothr = sinon.spy()
       var time = 2
-      var thr = throttle(tothr, time, true)
+      var thr = throttle(tothr, time)
       thr()
       thr()
       setTimeout(function () {
