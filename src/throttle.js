@@ -1,14 +1,14 @@
 module.exports = function throttle (func, wait) {
   var context, args, result, timeout, previous
   var later = function () {
-    previous = Date.now()
+    previous = new Date().getTime()
     result = func.apply(context, args)
     timeout = context = args = null
   }
   return function () {
     context = this
     args = arguments
-    var now = Date.now()
+    var now = new Date().getTime()
     if (!previous) previous = now
     var remaining = wait - (now - previous)
     if (remaining <= 0 || remaining > wait) {
