@@ -99,9 +99,7 @@ describe('polyfill', function () {
 
     require('./src/assign')(assign)
     require('./src/bind')(bind)
-    console.log({}.toString.call(require('./src/debounce') === '[object Function]'))
     require('./src/debounce')(debounce)
-    console.log({}.toString.call(require('./src/throttle') === '[object Function]'))
     require('./src/throttle')(throttle)
     require('./src/each')(each)
     require('./src/every')(every)
