@@ -27,6 +27,7 @@ module.exports = {
   set: require('./set'),
   slice: require('./slice'),
   some: require('./some'),
+  throttle: require('./throttle'),
   unique: require('./unique'),
   values: require('./values')
 }
