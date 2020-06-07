@@ -1,4 +1,4 @@
-module.exports = function throttle (func, wait) {
+module.exports = function throttle (func, wait, immediate) {
   var context, args, result, timeout, previous
   var later = function () {
     previous = new Date().getTime()
@@ -9,7 +9,7 @@ module.exports = function throttle (func, wait) {
     context = this
     args = arguments
     var now = new Date().getTime()
-    if (!previous) previous = now
+    if (!previous) previous = (immediate && -1) || now
     var remaining = wait - (now - previous)
     if (remaining <= 0 || remaining > wait) {
       if (timeout) timeout = clearTimeout(timeout)

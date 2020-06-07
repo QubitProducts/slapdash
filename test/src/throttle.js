@@ -11,19 +11,50 @@ module.exports = function (throttle) {
     })
 
     it('will only call once within a window', function () {
+      var clock = sinon.useFakeTimers(new Date().getTime() )
       var tothr = sinon.spy()
-      var thr = throttle(tothr, 90)
-      thr()
-      setTimeout(function () {
-        thr()
-      }, 30)
-      setTimeout(function () {
-        thr()
-      }, 60)
-      setTimeout(function () {
-        thr()
-        sinon.assert.calledTwice(tothr)
-      }, 150)
+      var throttled = throttle(tothr, 100)
+
+      throttled()
+      throttled()
+      sinon.assert.notCalled(tothr)
+
+      clock.tick(100)
+      sinon.assert.calledOnce(tothr)
+
+      clock.tick(100)
+
+      throttled()
+      throttled()
+      sinon.assert.calledTwice(tothr)
+      clock.restore()
+    })
+
+    it('will call immediately if set to call immediately', function () {
+      var clock = sinon.useFakeTimers(new Date().getTime())
+      var tothr = sinon.spy()
+      var throttled = throttle(tothr, 100, true)
+
+      throttled()
+      sinon.assert.calledOnce(tothr)
+
+      throttled()
+      sinon.assert.calledOnce(tothr)
+
+
+      clock.tick(100)
+      throttled()
+      sinon.assert.calledTwice(tothr)
+
+      throttled()
+      sinon.assert.calledTwice(tothr)
+
+      clock.tick(100)
+
+      throttled()
+      throttled()
+      sinon.assert.calledThrice(tothr)
+      clock.restore()
     })
 
     it('will resume calls once window is over', function (done) {
