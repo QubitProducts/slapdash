@@ -105,15 +105,14 @@ module.exports = function (throttle) {
       var clock = sinon.useFakeTimers(new Date().getTime())
       var tothr = function(num) { return num * num }
       var thr = throttle(tothr, 1, true)
-      var returnValue
       
-      returnValue = thr(3)
-      expect(returnValue).to.equal(9)
+      expect(thr(3)).to.equal(9)
+      expect(thr(4)).to.equal(9)
 
       clock.tick(2)
 
-      returnValue = thr(5)
-      expect(returnValue).to.equal(25)
+      expect(thr(5)).to.equal(25)
+      expect(thr(6)).to.equal(25)
 
       clock.restore()
     })
